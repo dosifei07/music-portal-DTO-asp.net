@@ -1,0 +1,20 @@
+﻿@model GenreViewModel
+@{
+    ViewData["Title"] = "Редактировать жанр";
+}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <h2 class="mb-4">Редактировать жанр</h2>
+        <form asp-controller="Genres" asp-action="Edit" asp-route-id="@Model.Id" method="post">
+            <input type="hidden" asp-for="Id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+            <a class="btn btn-outline-secondary" asp-controller="Genres" asp-action="Index">Отмена</a>
+        </form>
+    </div>
+</div>

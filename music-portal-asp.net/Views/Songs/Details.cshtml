@@ -1,0 +1,117 @@
+﻿@model SongDTO
+@{
+    ViewData["Title"] = Model.Title;
+    var comments = ViewBag.Comments as PagedResult<CommentDTO>;
+    int? myRating = ViewBag.MyRating;
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <h2>@Model.Title</h2>
+        <h5 class="text-muted">
+            <a asp-controller="Artists" asp-action="Details" asp-route-id="@Model.ArtistId">@Model.ArtistName</a>
+        </h5>
+
+        <p>
+            @foreach (var g in Model.GenreNames)
+            {
+                <span class="badge bg-secondary genre-badge">@g</span>
+            }
+        </p>
+
+        <p class="text-muted">
+            <span class="rating-star">★</span> @Model.Rating.ToString("0.0")
+            &nbsp;|&nbsp; ▶ @Model.PlayCount прослушиваний
+            &nbsp;|&nbsp; загружено @Model.UploadDate.ToString("dd.MM.yyyy")
+        </p>
+
+        <audio controls src="@Url.Action("Play", "Songs", new { id = Model.Id })" class="mb-3"></audio>
+
+        <div class="d-flex gap-2 mb-4">
+            <a class="btn btn-success" asp-controller="Songs" asp-action="Download" asp-route-id="@Model.Id">Скачать</a>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <a class="btn btn-outline-secondary" asp-controller="Songs" asp-action="Edit" asp-route-id="@Model.Id">Редактировать</a>
+                <form asp-controller="Songs" asp-action="Delete" asp-route-id="@Model.Id" method="post"
+                      onsubmit="return confirm('Удалить песню безвозвратно?');">
+                    <button type="submit" class="btn btn-outline-danger">Удалить</button>
+                </form>
+            }
+        </div>
+
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h6 class="card-title">Ваша оценка</h6>
+                    <form asp-controller="Songs" asp-action="Rate" method="post" class="d-flex gap-2 align-items-center">
+                        <input type="hidden" name="songId" value="@Model.Id" />
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            <label class="form-check-label">
+                                <input type="radio" name="value" value="@i" class="form-check-input" checked="@(myRating == i)" onchange="this.form.submit()" />
+                                @i
+                            </label>
+                        }
+                    </form>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-light border">
+                <a asp-controller="Account" asp-action="Login">Войдите</a>, чтобы оценить песню и оставить комментарий.
+            </div>
+        }
+
+        <h5>Комментарии</h5>
+
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <form asp-controller="Songs" asp-action="AddComment" method="post" class="mb-3">
+                <input type="hidden" name="songId" value="@Model.Id" />
+                <div class="mb-2">
+                    <textarea name="text" class="form-control" rows="2" placeholder="Ваш комментарий..." required maxlength="1000"></textarea>
+                </div>
+                <button type="submit" class="btn btn-sm btn-primary">Отправить</button>
+            </form>
+        }
+
+        @if (comments == null || !comments.Items.Any())
+        {
+            <p class="text-muted">Комментариев пока нет.</p>
+        }
+        @if (comments != null)
+        {
+            @foreach (var c in comments.Items)
+            {
+                <div class="border-bottom py-2">
+                    <strong>@c.Username</strong>
+                    <span class="text-muted small">@c.CreatedAt.ToString("dd.MM.yyyy HH:mm")</span>
+                    <p class="mb-0">@c.Text</p>
+                </div>
+            }
+
+            @if (comments.TotalPages > 1)
+            {
+                <nav class="mt-3">
+                    <ul class="pagination pagination-sm">
+                        <li class="page-item @(comments.HasPrevious ? "" : "disabled")">
+                            <a class="page-link" asp-controller="Songs" asp-action="Details" asp-route-id="@Model.Id" asp-route-commentPage="@(comments.Page - 1)">Назад</a>
+                        </li>
+                        @for (int p = 1; p <= comments.TotalPages; p++)
+                        {
+                            <li class="page-item @(p == comments.Page ? "active" : "")">
+                                <a class="page-link" asp-controller="Songs" asp-action="Details" asp-route-id="@Model.Id" asp-route-commentPage="@p">@p</a>
+                            </li>
+                        }
+                        <li class="page-item @(comments.HasNext ? "" : "disabled")">
+                            <a class="page-link" asp-controller="Songs" asp-action="Details" asp-route-id="@Model.Id" asp-route-commentPage="@(comments.Page + 1)">Вперёд</a>
+                        </li>
+                    </ul>
+                </nav>
+            }
+        }
+    </div>
+</div>

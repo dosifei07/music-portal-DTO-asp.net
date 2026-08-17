@@ -1,0 +1,159 @@
+﻿@model PagedResult<SongDTO>
+
+@{
+    ViewData["Title"] = "Каталог песен";
+    var genres = ViewBag.Genres as IEnumerable<GenreDTO>;
+    int? selectedGenreId = ViewBag.SelectedGenreId as int?;
+    string? currentSort = ViewBag.SortBy as string;
+    bool currentDesc = ViewBag.Desc ?? true;
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>🎵 Каталог песен</h2>
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <a asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-upload"></i> Загрузить песню
+            </a>
+        }
+    </div>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["Message"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" asp-action="Index" class="row g-3 align-items-center">
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">Жанр:</label>
+                    <select name="genreId" class="form-select" onchange="this.form.submit()">
+                        <option value="">Все жанры</option>
+                        @if (genres != null)
+                        {
+                            foreach (var genre in genres)
+                            {
+                                <option value="@genre.Id" selected="@(genre.Id == selectedGenreId)">
+                                    @genre.Name
+                                </option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">Сортировка:</label>
+                    <select name="sortBy" class="form-select" onchange="this.form.submit()">
+                        <option value="title" selected="@(currentSort == "title")">По названию</option>
+                        <option value="rating" selected="@(currentSort == "rating")">По рейтингу</option>
+                        <option value="plays" selected="@(currentSort == "plays")">По прослушиваниям</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4 d-flex align-items-end">
+                    <input type="hidden" name="desc" value="@(currentDesc ? "true" : "false")" />
+                    <button type="submit" class="btn btn-outline-secondary w-100">Применить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (Model != null && Model.Items != null && Model.Items.Any())
+    {
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            @foreach (var song in Model.Items)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title text-truncate">@song.Title</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">@song.ArtistName</h6>
+                            
+                            <p class="card-text mb-1">
+                                <small class="text-muted">Рейтинг:</small> 
+                                <span class="badge bg-warning text-dark">⭐ @song.Rating.ToString("F1")</span>
+                            </p>
+                            <p class="card-text mb-3">
+                                <small class="text-muted">Прослушиваний:</small> 🎧 @song.PlayCount
+                            </p>
+
+                            <!-- Audio Player -->
+                            <audio controls class="w-100 mb-3">
+                                <source src="@Url.Action("Play", "Songs", new { id = song.Id })" type="audio/mpeg">
+                                Ваш браузер не поддерживает аудиоэлемент.
+                            </audio>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a asp-action="Details" asp-route-id="@song.Id" class="btn btn-sm btn-outline-primary">
+                                    Подробнее
+                                </a>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <div class="btn-group">
+                                        <a asp-action="Edit" asp-route-id="@song.Id" class="btn btn-sm btn-outline-secondary">Редактировать</a>
+                                        <form asp-action="Delete" asp-route-id="@song.Id" method="post" onsubmit="return confirm('Удалить песню?');">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">Удалить</button>
+                                        </form>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        @if (Model.TotalPages > 1)
+        {
+            <nav aria-label="Page navigation" class="mt-4">
+                <ul class="pagination justify-content-center">
+                    @foreach (var pageNum in PaginationHelper.BuildPageList(Model.Page, Model.TotalPages))
+                    {
+                        if (pageNum == null)
+                        {
+                            <li class="page-item disabled"><span class="page-link">&hellip;</span></li>
+                        }
+                        else if (pageNum == Model.Page)
+                        {
+                            <li class="page-item active" aria-current="page">
+                                <span class="page-link">@pageNum</span>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item">
+                                <a class="page-link" 
+                                   asp-action="Index" 
+                                   asp-route-page="@pageNum" 
+                                   asp-route-genreId="@selectedGenreId" 
+                                   asp-route-sortBy="@currentSort" 
+                                   asp-route-desc="@currentDesc">
+                                    @pageNum
+                                </a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </nav>
+        }
+    }
+    else
+    {
+        <div class="text-center py-5">
+            <h4 class="text-muted">Песни не найдены</h4>
+            <p>Попробуйте изменить параметры фильтрации или загрузить новую песню.</p>
+        </div>
+    }
+</div>

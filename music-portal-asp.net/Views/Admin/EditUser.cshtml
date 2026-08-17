@@ -1,0 +1,35 @@
+@model UserDTO
+@{
+    ViewData["Title"] = "Редактирование пользователя";
+    var allRoles = ViewBag.AllRoles as IEnumerable<RoleDTO> ?? Enumerable.Empty<RoleDTO>();
+    var userRoleIds = Model.RoleIds.ToHashSet();
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h2 class="mb-4">@Model.Username</h2>
+        <form asp-controller="Admin" asp-action="EditUser" asp-route-id="@Model.Id" method="post">
+            <p class="text-muted">Email: @Model.Email</p>
+
+            <div class="mb-3">
+                <label class="form-label">Роли</label>
+                @foreach (var role in allRoles)
+                {
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="roleIds" value="@role.Id" id="role-@role.Id"
+                               checked="@userRoleIds.Contains(role.Id)" />
+                        <label class="form-check-label" for="role-@role.Id">@role.Name</label>
+                    </div>
+                }
+            </div>
+
+            <div class="form-check mb-3">
+                <input type="checkbox" class="form-check-input" name="isApproved" value="true" id="isApproved" checked="@Model.IsApproved" />
+                <label class="form-check-label" for="isApproved">Одобрен</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+            <a class="btn btn-outline-secondary" asp-controller="Admin" asp-action="Users">Отмена</a>
+        </form>
+    </div>
+</div>

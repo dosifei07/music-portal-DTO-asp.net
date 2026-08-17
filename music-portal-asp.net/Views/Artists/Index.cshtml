@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ArtistDTO>
+@{
+    ViewData["Title"] = "Исполнители";
+}
+
+<h2 class="mb-4">Исполнители</h2>
+
+@if (!Model.Any())
+{
+    <p class="text-muted">Исполнителей пока нет.</p>
+}
+
+<div class="row row-cols-1 row-cols-md-3 g-3">
+    @foreach (var artist in Model)
+    {
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a asp-controller="Artists" asp-action="Details" asp-route-id="@artist.Id" class="text-decoration-none">@artist.Name</a>
+                    </h5>
+                    <p class="card-text text-muted small">@artist.SongCount песен</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

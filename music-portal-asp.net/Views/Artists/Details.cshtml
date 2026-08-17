@@ -1,0 +1,41 @@
+﻿@model ArtistDTO
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<h2>@Model.Name</h2>
+@if (!string.IsNullOrWhiteSpace(Model.Bio))
+{
+    <p class="text-muted">@Model.Bio</p>
+}
+
+<h5 class="mt-4">Песни</h5>
+@if (!Model.Songs.Any())
+{
+    <p class="text-muted">У исполнителя пока нет песен.</p>
+}
+<table class="table bg-white">
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Рейтинг</th>
+            <th>Прослушивания</th>
+            <th>Дата загрузки</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var song in Model.Songs.OrderByDescending(s => s.UploadDate))
+        {
+            <tr>
+                <td><a asp-controller="Songs" asp-action="Details" asp-route-id="@song.Id">@song.Title</a></td>
+                <td><span class="rating-star">★</span> @song.Rating.ToString("0.0")</td>
+                <td>@song.PlayCount</td>
+                <td>@song.UploadDate.ToString("dd.MM.yyyy")</td>
+                <td>
+                    <a class="btn btn-sm btn-primary" asp-controller="Songs" asp-action="Play" asp-route-id="@song.Id" target="_blank">▶</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

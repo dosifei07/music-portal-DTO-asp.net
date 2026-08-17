@@ -1,0 +1,41 @@
+﻿@model IEnumerable<MusicPortal.BusinessLogic.DTO.UserDTO>
+@{
+    ViewData["Title"] = "Заявки на регистрацию";
+}
+
+<h2 class="mb-4">Заявки на регистрацию</h2>
+
+@if (!Model.Any())
+{
+    <p class="text-muted">Новых заявок нет.</p>
+}
+
+<table class="table table-striped bg-white align-middle">
+    <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Email</th>
+            <th>Дата регистрации</th>
+            <th class="text-end">Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Username</td>
+                <td>@user.Email</td>
+                <td>@user.CreatedAt.ToString("dd.MM.yyyy")</td>
+                <td class="text-end">
+                    <form asp-controller="Admin" asp-action="Approve" asp-route-id="@user.Id" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-sm btn-success">Одобрить</button>
+                    </form>
+                    <form asp-controller="Admin" asp-action="Reject" asp-route-id="@user.Id" method="post" class="d-inline"
+                          onsubmit="return confirm('Отклонить и удалить заявку?');">
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Отклонить</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

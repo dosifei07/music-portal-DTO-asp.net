@@ -1,0 +1,23 @@
+﻿@model Artist
+@{
+    ViewData["Title"] = "Новый исполнитель";
+}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <h2 class="mb-4">Новый исполнитель</h2>
+        <form asp-controller="Artists" asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3">
+                <label class="form-label">Имя</label>
+                <input asp-for="Name" class="form-control" maxlength="100" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Биография</label>
+                <textarea asp-for="Bio" class="form-control" rows="3" maxlength="1000"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Создать</button>
+            <a class="btn btn-outline-secondary" asp-controller="Artists" asp-action="Index">Отмена</a>
+        </form>
+    </div>
+</div>
