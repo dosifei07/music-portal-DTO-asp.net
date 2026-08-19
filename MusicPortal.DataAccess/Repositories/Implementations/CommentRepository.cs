@@ -30,6 +30,7 @@ namespace MusicPortal.DataAccess.Repositories.Implementations
 
             return new PagedResult<Comment>(items, totalCount, page, pageSize);
         }
+
         public async Task AddAsync(int songId, int userId, string text)
         {
             var song = await _context.Songs.FindAsync(songId);
@@ -43,6 +44,8 @@ namespace MusicPortal.DataAccess.Repositories.Implementations
                 Text = text,
                 CreatedAt = DateTime.UtcNow
             });
+
+            await _context.SaveChangesAsync();
         }
     }
 }

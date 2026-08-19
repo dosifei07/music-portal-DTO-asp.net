@@ -11,6 +11,6 @@ namespace MusicPortal.DataAccess.Models
         [MaxLength(50)]
         public string Name { get; set; } = string.Empty;
 
-        public ICollection<User> Users { get; set; } = new List<User>();
+        public virtual ICollection<User> Users { get; set; } = new List<User>();
     }
 }

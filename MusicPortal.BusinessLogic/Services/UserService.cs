@@ -2,81 +2,78 @@ using AutoMapper;
 using MusicPortal.BusinessLogic.DTO;
 using MusicPortal.BusinessLogic.Infrastructure;
 using MusicPortal.DataAccess.Models;
-using MusicPortal.DataAccess.Repositories;
 using MusicPortal.DataAccess.Repositories.Interfaces;
 
 namespace MusicPortal.BusinessLogic.Services
 {
     public class UserService : IUserService
     {
-        private readonly IUnitOfWork _uow;
+        private readonly IUserRepository _userRepository;
+        private readonly IRoleRepository _roleRepository;
+        private readonly IArtistRepository _artistRepository;
         private readonly IMapper _mapper;
 
-        public UserService(IUnitOfWork uow, IMapper mapper)
+        public UserService(IUserRepository userRepository, IRoleRepository roleRepository, IArtistRepository artistRepository, IMapper mapper)
         {
-            _uow = uow;
+            _userRepository = userRepository;
+            _roleRepository = roleRepository;
+            _artistRepository = artistRepository;
             _mapper = mapper;
         }
 
         public async Task<IEnumerable<UserDTO>> GetPendingUsersAsync()
         {
-            var pending = await _uow.Users.GetPendingUsersAsync();
+            var pending = await _userRepository.GetPendingUsersAsync();
             return _mapper.Map<IEnumerable<UserDTO>>(pending);
         }
 
         public async Task<UserDTO?> GetByIdAsync(int id)
         {
-            var user = await _uow.Users.GetByIdAsync(id);
+            var user = await _userRepository.GetByIdAsync(id);
             return _mapper.Map<UserDTO?>(user);
         }
 
         public async Task ApproveAsync(int userId)
         {
-            var user = await _uow.Users.GetByIdAsync(userId);
+            var user = await _userRepository.GetByIdAsync(userId);
             if (user == null)
                 throw new ValidationException("Пользователь не найден.", nameof(userId));
 
-            var userRole = await _uow.Roles.GetByNameAsync("User");
+            var userRole = await _roleRepository.GetByNameAsync("User");
             if (userRole == null)
                 throw new ValidationException("Роль 'User' не настроена в системе.", "");
 
             var roles = new List<Role> { userRole };
 
-            var artistProfile = await _uow.Artists.GetByUserIdAsync(userId);
+            var artistProfile = await _artistRepository.GetByUserIdAsync(userId);
             if (artistProfile != null)
             {
-                var artistRole = await _uow.Roles.GetByNameAsync("Artist");
+                var artistRole = await _roleRepository.GetByNameAsync("Artist");
                 if (artistRole != null) roles.Add(artistRole);
             }
 
-            var success = await _uow.Users.ApproveUserAsync(user, roles);
+            var success = await _userRepository.ApproveUserAsync(user, roles);
             if (!success)
                 throw new ValidationException("Не удалось сохранить изменения при одобрении пользователя.", "");
         }
 
         public async Task RejectAsync(int userId)
         {
-            var staged = await _uow.Users.DeleteAsync(userId);
+            var staged = await _userRepository.DeleteAsync(userId);
             if (!staged)
                 throw new ValidationException("Заявка пользователя не найдена.", nameof(userId));
-
-            if (!await _uow.SaveChangesAsync())
-                throw new ValidationException("Не удалось отклонить заявку.", "");
         }
 
         public async Task DeleteAsync(int userId)
         {
-            var staged = await _uow.Users.DeleteAsync(userId);
+            var staged = await _userRepository.DeleteAsync(userId);
             if (!staged)
                 throw new ValidationException("Пользователь не найден.", nameof(userId));
-
-            if (!await _uow.SaveChangesAsync())
-                throw new ValidationException("Не удалось удалить пользователя.", "");
         }
 
         public async Task<PagedResult<UserDTO>> GetAllUsersAsync(int page, int pageSize)
         {
-            var paged = await _uow.Users.GetAllUsersAsync(page, pageSize);
+            var paged = await _userRepository.GetAllUsersAsync(page, pageSize);
             var dtos = _mapper.Map<List<UserDTO>>(paged.Items);
 
             return new PagedResult<UserDTO>
@@ -90,20 +87,20 @@ namespace MusicPortal.BusinessLogic.Services
 
         public async Task<IEnumerable<RoleDTO>> GetAllRolesAsync()
         {
-            var roles = await _uow.Roles.GetAllAsync();
+            var roles = await _roleRepository.GetAllAsync();
             return _mapper.Map<IEnumerable<RoleDTO>>(roles);
         }
 
         public async Task UpdateUserAsync(int userId, List<int> roleIds, bool isApproved)
         {
-            var user = await _uow.Users.GetByIdAsync(userId);
+            var user = await _userRepository.GetByIdAsync(userId);
             if (user == null)
                 throw new ValidationException("Пользователь не найден.", nameof(userId));
 
-            var roles = await _uow.Roles.GetByIdsAsync(roleIds);
+            var roles = await _roleRepository.GetByIdsAsync(roleIds);
             user.IsApproved = isApproved;
 
-            var success = await _uow.Users.SetRolesAsync(user, roles);
+            var success = await _userRepository.SetRolesAsync(user, roles);
             if (!success)
                 throw new ValidationException("Не удалось обновить пользователя.", "");
         }

@@ -95,7 +95,7 @@ namespace music_portal_asp.net.Controllers
                 new Claim(ClaimTypes.Name, userDto.Username ?? string.Empty),
                 new Claim(ClaimTypes.Email, userDto.Email ?? string.Empty)
             };
-            claims.AddRange(userDto.RoleNames.Select(r => new Claim(ClaimTypes.Role, r)));
+            claims.AddRange(userDto.Roles.Select(r => new Claim(ClaimTypes.Role, r.Name ?? string.Empty)));
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var authProperties = new AuthenticationProperties

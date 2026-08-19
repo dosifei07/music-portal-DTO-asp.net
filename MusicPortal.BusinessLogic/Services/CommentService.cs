@@ -7,18 +7,18 @@ namespace MusicPortal.BusinessLogic.Services
 {
     public class CommentService : ICommentService
     {
-        private readonly IUnitOfWork _uow;
+        private readonly ICommentRepository _commentRepository;
         private readonly IMapper _mapper;
 
-        public CommentService(IUnitOfWork uow, IMapper mapper)
+        public CommentService(ICommentRepository commentRepository, IMapper mapper)
         {
-            _uow = uow;
+            _commentRepository = commentRepository;
             _mapper = mapper;
         }
 
         public async Task<PagedResult<CommentDTO>> GetBySongIdAsync(int songId, int page = 1, int pageSize = 10)
         {
-            var pagedComments = await _uow.Comments.GetBySongIdAsync(songId, page, pageSize);
+            var pagedComments = await _commentRepository.GetBySongIdAsync(songId, page, pageSize);
             var mappedItems = _mapper.Map<List<CommentDTO>>(pagedComments.Items);
 
             return new PagedResult<CommentDTO>
@@ -29,16 +29,15 @@ namespace MusicPortal.BusinessLogic.Services
                 PageSize = pagedComments.PageSize
             };
         }
+
         public async Task AddAsync(CommentDTO commentDto)
         {
-            await _uow.Comments.AddAsync(commentDto.SongId, commentDto.UserId, commentDto.Text ?? string.Empty);
-            await _uow.SaveChangesAsync();
+            await _commentRepository.AddAsync(commentDto.SongId, commentDto.UserId, commentDto.Text ?? string.Empty);
         }
 
         public async Task AddAsync(int songId, int userId, string text)
         {
-            await _uow.Comments.AddAsync(songId, userId, text);
-            await _uow.SaveChangesAsync();
+            await _commentRepository.AddAsync(songId, userId, text);
         }
     }
 }

@@ -35,12 +35,12 @@ namespace music_portal_asp.net.Controllers
 
         private int? CurrentUserId => int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var id) ? id : null;
 
-        private async Task<List<ArtistDTO>> PopulateFormLookupsAsync(IEnumerable<int>? selectedGenreIds = null, int? selectedArtistId = null)
+        private async Task<List<ArtistDTOBrief>> PopulateFormLookupsAsync(IEnumerable<int>? selectedGenreIds = null, int? selectedArtistId = null)
         {
             var genres = await _genreService.GetAllAsync();
-            ViewBag.Genres = new MultiSelectList(genres, "Id", "Name", selectedGenreIds);
+            ViewBag.Genres = genres;
 
-            var artists = (await _artistService.GetAllAsync()).ToList();
+            var artists = (await _artistService.GetAllBriefAsync()).ToList();
             ViewBag.Artists = new SelectList(artists, "Id", "Name", selectedArtistId);
             return artists;
         }
@@ -121,7 +121,7 @@ namespace music_portal_asp.net.Controllers
                 Title = model.Title,
                 FilePath = $"/uploads/songs/{uniqueFileName}",
                 ArtistId = model.ArtistId,
-                GenreIds = model.GenreIds
+                Genres = model.GenreIds.Select(id => new GenreDTO { Id = id }).ToList()
             };
 
             int songId;
@@ -152,7 +152,7 @@ namespace music_portal_asp.net.Controllers
                 Id = song.Id,
                 Title = song.Title ?? string.Empty,
                 ArtistId = song.ArtistId,
-                GenreIds = song.GenreIds
+                GenreIds = song.Genres.Select(g => g.Id).ToList()
             };
 
             await PopulateFormLookupsAsync(vm.GenreIds, vm.ArtistId);
@@ -177,7 +177,7 @@ namespace music_portal_asp.net.Controllers
                 Id = model.Id,
                 Title = model.Title,
                 ArtistId = model.ArtistId,
-                GenreIds = model.GenreIds
+                Genres = model.GenreIds.Select(id => new GenreDTO { Id = id }).ToList()
             };
 
             try

@@ -8,6 +8,7 @@ namespace MusicPortal.BusinessLogic.Services
     public interface IArtistService
     {
         Task<IEnumerable<ArtistDTO>> GetAllAsync();
+        Task<IEnumerable<ArtistDTOBrief>> GetAllBriefAsync();
         Task<ArtistDTO?> GetByIdAsync(int id);
         Task CreateAsync(Artist artist);
     }

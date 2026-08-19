@@ -1,6 +1,8 @@
 ﻿@model SongUploadViewModel
 @{
     ViewData["Title"] = "Загрузить песню";
+    var genres = ViewBag.Genres as IEnumerable<GenreDTO> ?? Enumerable.Empty<GenreDTO>();
+    var selectedGenreIds = Model.GenreIds?.ToHashSet() ?? new HashSet<int>();
 }
 
 <div class="row justify-content-center">
@@ -34,9 +36,15 @@
             </div>
 
             <div class="mb-3">
-                <label asp-for="GenreIds" class="form-label"></label>
-                <select asp-for="GenreIds" asp-items="ViewBag.Genres" class="form-select" multiple size="6"></select>
-                <div class="form-text">Ctrl + клик чтобы выбрать несколько.</div>
+                <label class="form-label">Жанры</label>
+                @foreach (var genre in genres)
+                {
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="GenreIds" value="@genre.Id"
+                               id="genre-@genre.Id" checked="@selectedGenreIds.Contains(genre.Id)" />
+                        <label class="form-check-label" for="genre-@genre.Id">@genre.Name</label>
+                    </div>
+                }
                 <span asp-validation-for="GenreIds" class="text-danger"></span>
             </div>
 

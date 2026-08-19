@@ -10,7 +10,6 @@ namespace MusicPortal.BusinessLogic.DTO
         public double Rating { get; set; }
         public int PlayCount { get; set; }
         public DateTime UploadDate { get; set; }
-        public List<int> GenreIds { get; set; } = new();
-        public List<string> GenreNames { get; set; } = new();
+        public List<GenreDTO> Genres { get; set; } = new();
     }
 }

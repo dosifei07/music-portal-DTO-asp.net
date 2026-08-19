@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Редактирование пользователя";
     var allRoles = ViewBag.AllRoles as IEnumerable<RoleDTO> ?? Enumerable.Empty<RoleDTO>();
-    var userRoleIds = Model.RoleIds.ToHashSet();
+    var userRoleIds = Model.Roles.Select(r => r.Id).ToHashSet();
 }
 
 <div class="row justify-content-center">

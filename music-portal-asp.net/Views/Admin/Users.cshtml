@@ -22,9 +22,9 @@
                 <td>@user.Username</td>
                 <td>@user.Email</td>
                 <td>
-                    @foreach (var role in user.RoleNames)
+                    @foreach (var role in user.Roles)
                     {
-                        <span class="badge bg-secondary genre-badge">@role</span>
+                        <span class="badge bg-secondary genre-badge">@role.Name</span>
                     }
                 </td>
                 <td>

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using MusicPortal.DataAccess.Data;
 using MusicPortal.DataAccess.Models;
 using MusicPortal.DataAccess.Repositories.Interfaces;
@@ -26,14 +27,34 @@ namespace MusicPortal.DataAccess.Repositories.Implementations
             {
                 existing.Value = value;
                 _context.Ratings.Update(existing);
-                return;
+            }
+            else
+            {
+                var song = await _context.Songs.FindAsync(songId);
+                var user = await _context.Users.FindAsync(userId);
+                if (song == null || user == null) return;
+
+                await _context.Ratings.AddAsync(new Rating { Song = song, User = user, Value = value });
             }
 
-            var song = await _context.Songs.FindAsync(songId);
-            var user = await _context.Users.FindAsync(userId);
-            if (song == null || user == null) return;
+            await _context.SaveChangesAsync();
+            await RecalculateSongRatingAsync(songId);
+        }
 
-            await _context.Ratings.AddAsync(new Rating { Song = song, User = user, Value = value });
+        private async Task RecalculateSongRatingAsync(int songId)
+        {
+            var song = await _context.Songs
+                .Include(s => s.Ratings)
+                .FirstOrDefaultAsync(s => s.Id == songId);
+
+            if (song != null)
+            {
+                song.Rating = song.Ratings.Any()
+                    ? Math.Round(song.Ratings.Average(r => r.Value), 1)
+                    : 0.0;
+
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

@@ -13,9 +13,9 @@
         </h5>
 
         <p>
-            @foreach (var g in Model.GenreNames)
+            @foreach (var g in Model.Genres)
             {
-                <span class="badge bg-secondary genre-badge">@g</span>
+                <span class="badge bg-secondary genre-badge">@g.Name</span>
             }
         </p>
 

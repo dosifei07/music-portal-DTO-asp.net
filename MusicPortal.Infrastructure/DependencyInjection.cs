@@ -13,14 +13,21 @@ namespace MusicPortal.Infrastructure
         public static IServiceCollection AddMusicPortalContext(this IServiceCollection services, string? connectionString)
         {
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(connectionString));
+                options.UseLazyLoadingProxies().UseSqlServer(connectionString));
 
             return services;
         }
 
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<IArtistRepository, ArtistRepository>();
+            services.AddScoped<ISongRepository, SongRepository>();
+            services.AddScoped<IGenreRepository, GenreRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<IRatingRepository, RatingRepository>();
+
             return services;
         }
 

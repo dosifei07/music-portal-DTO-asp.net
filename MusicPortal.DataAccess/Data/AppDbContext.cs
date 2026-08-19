@@ -54,7 +54,7 @@ namespace MusicPortal.DataAccess.Data
             modelBuilder.Entity<Artist>()
                 .HasOne(a => a.User)
                 .WithOne(u => u.ArtistProfile)
-                .HasForeignKey<Artist>(a => a.UserId)
+                .HasForeignKey<Artist>("UserId")
                 .OnDelete(DeleteBehavior.SetNull)
                 .IsRequired(false);
 
@@ -71,8 +71,7 @@ namespace MusicPortal.DataAccess.Data
 
                 b.Property(s => s.Rating)
                     .HasColumnType("float")
-                    .HasDefaultValue(0)
-                    .ValueGeneratedOnAddOrUpdate();
+                    .HasDefaultValue(0);
             });
 
             modelBuilder.Entity<Song>()
