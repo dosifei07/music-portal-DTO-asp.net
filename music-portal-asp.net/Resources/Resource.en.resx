@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <data name="AccessDeniedHeader" xml:space="preserve">
+    <value>Access denied</value>
+  </data>
+  <data name="AccessDeniedText" xml:space="preserve">
+    <value>You do not have permission to view this page.</value>
+  </data>
+  <data name="ActionsColumn" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="AddGenreLink" xml:space="preserve">
+    <value>Add genre</value>
+  </data>
+  <data name="AllGenres" xml:space="preserve">
+    <value>All genres</value>
+  </data>
+  <data name="AlreadyHaveAccount" xml:space="preserve">
+    <value>Already have an account?</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+  <data name="ApprovedColumn" xml:space="preserve">
+    <value>Approved</value>
+  </data>
+  <data name="ApprovedLabel" xml:space="preserve">
+    <value>Approved</value>
+  </data>
+  <data name="ArtistFieldLabel" xml:space="preserve">
+    <value>Artist</value>
+  </data>
+  <data name="ArtistLabel" xml:space="preserve">
+    <value>Artist</value>
+  </data>
+  <data name="ArtistNameLabel" xml:space="preserve">
+    <value>Stage name (if registering as Artist)</value>
+  </data>
+  <data name="ArtistNameLength" xml:space="preserve">
+    <value>Artist name must not exceed 100 characters</value>
+  </data>
+  <data name="ArtistRequired" xml:space="preserve">
+    <value>Select an artist</value>
+  </data>
+  <data name="ArtistsHeader" xml:space="preserve">
+    <value>Artists</value>
+  </data>
+  <data name="BioFieldLabel" xml:space="preserve">
+    <value>About / Bio</value>
+  </data>
+  <data name="BioLabel" xml:space="preserve">
+    <value>Bio</value>
+  </data>
+  <data name="BioLength" xml:space="preserve">
+    <value>Description must not exceed 1000 characters</value>
+  </data>
+  <data name="ByPlays" xml:space="preserve">
+    <value>By plays</value>
+  </data>
+  <data name="ByRating" xml:space="preserve">
+    <value>By rating</value>
+  </data>
+  <data name="ByTitle" xml:space="preserve">
+    <value>By title</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CatalogHeader" xml:space="preserve">
+    <value>Song catalog</value>
+  </data>
+  <data name="ChooseLang" xml:space="preserve">
+    <value>Choose language</value>
+  </data>
+  <data name="CommentRequired" xml:space="preserve">
+    <value>This field is required.</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="ConfirmPasswordLabel" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteGenreConfirm" xml:space="preserve">
+    <value>Delete genre? It will be unlinked from all songs.</value>
+  </data>
+  <data name="DeletePermanentConfirm" xml:space="preserve">
+    <value>Delete this song permanently?</value>
+  </data>
+  <data name="DeleteSongConfirm" xml:space="preserve">
+    <value>Delete song?</value>
+  </data>
+  <data name="DeleteUserConfirm" xml:space="preserve">
+    <value>Delete user? Their artist profile and songs will be preserved.</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="EditGenreHeader" xml:space="preserve">
+    <value>Edit genre</value>
+  </data>
+  <data name="EditSongHeader" xml:space="preserve">
+    <value>Edit song</value>
+  </data>
+  <data name="EditUserHeader" xml:space="preserve">
+    <value>Edit user</value>
+  </data>
+  <data name="EmailColumn" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EmailInvalid" xml:space="preserve">
+    <value>Invalid email format</value>
+  </data>
+  <data name="EmailLabel" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>Enter your email</value>
+  </data>
+  <data name="ErrorHeader" xml:space="preserve">
+    <value>Something went wrong</value>
+  </data>
+  <data name="ErrorText" xml:space="preserve">
+    <value>An unexpected error occurred. Try going back to the home page.</value>
+  </data>
+  <data name="FileFormatsHint" xml:space="preserve">
+    <value>Formats: mp3, wav, flac, ogg. Max 50 MB.</value>
+  </data>
+  <data name="FileLabel" xml:space="preserve">
+    <value>Audio file (mp3, wav, flac, ogg)</value>
+  </data>
+  <data name="FileRequired" xml:space="preserve">
+    <value>Select an audio file</value>
+  </data>
+  <data name="Genre" xml:space="preserve">
+    <value>Genre</value>
+  </data>
+  <data name="GenreNameLength" xml:space="preserve">
+    <value>Name must not exceed 50 characters</value>
+  </data>
+  <data name="GenreNameRequired" xml:space="preserve">
+    <value>Enter the genre name</value>
+  </data>
+  <data name="GenresHeader" xml:space="preserve">
+    <value>Genres</value>
+  </data>
+  <data name="GenresLabel" xml:space="preserve">
+    <value>Genres</value>
+  </data>
+  <data name="GenresRequired" xml:space="preserve">
+    <value>Select at least one genre</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="LoginHeader" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="LoginLink" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="LoginToRateAndComment" xml:space="preserve">
+    <value>Log in to rate the song and leave a comment.</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+  <data name="MultiSelectHint" xml:space="preserve">
+    <value>Ctrl + click to select multiple.</value>
+  </data>
+  <data name="NameColumn" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NameLabel" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NavArtists" xml:space="preserve">
+    <value>Artists</value>
+  </data>
+  <data name="NavGenres" xml:space="preserve">
+    <value>Genres</value>
+  </data>
+  <data name="NavRequests" xml:space="preserve">
+    <value>Requests</value>
+  </data>
+  <data name="NavSongs" xml:space="preserve">
+    <value>Songs</value>
+  </data>
+  <data name="NavUpload" xml:space="preserve">
+    <value>Upload song</value>
+  </data>
+  <data name="NavUsers" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="NewArtistHeader" xml:space="preserve">
+    <value>New artist</value>
+  </data>
+  <data name="NewArtistLink" xml:space="preserve">
+    <value>+ New artist</value>
+  </data>
+  <data name="NewGenreHeader" xml:space="preserve">
+    <value>New genre</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="NoAccountYet" xml:space="preserve">
+    <value>No account yet?</value>
+  </data>
+  <data name="NoArtistSongs" xml:space="preserve">
+    <value>This artist has no songs yet.</value>
+  </data>
+  <data name="NoArtistsYet" xml:space="preserve">
+    <value>No artists yet.</value>
+  </data>
+  <data name="NoComments" xml:space="preserve">
+    <value>No comments yet.</value>
+  </data>
+  <data name="NoPendingRequests" xml:space="preserve">
+    <value>No pending requests.</value>
+  </data>
+  <data name="NoSongsFound" xml:space="preserve">
+    <value>No songs found</value>
+  </data>
+  <data name="PasswordLabel" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PasswordLength" xml:space="preserve">
+    <value>Password must be at least 6 characters</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Enter a password</value>
+  </data>
+  <data name="PasswordsMismatch" xml:space="preserve">
+    <value>Passwords do not match</value>
+  </data>
+  <data name="PendingUsersHeader" xml:space="preserve">
+    <value>Registration requests</value>
+  </data>
+  <data name="PlayCountLabel" xml:space="preserve">
+    <value>Plays</value>
+  </data>
+  <data name="PlaysLabel" xml:space="preserve">
+    <value>Plays</value>
+  </data>
+  <data name="RatingLabel" xml:space="preserve">
+    <value>Rating</value>
+  </data>
+  <data name="RegDateColumn" xml:space="preserve">
+    <value>Registration date</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="RegisterAsArtist" xml:space="preserve">
+    <value>Register as Artist (requires approval)</value>
+  </data>
+  <data name="RegisterHeader" xml:space="preserve">
+    <value>Registration</value>
+  </data>
+  <data name="RegisterLink" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="RegisterNotice" xml:space="preserve">
+    <value>After registration, your request will be reviewed by the portal administrator.</value>
+  </data>
+  <data name="RegistrationPendingHeader" xml:space="preserve">
+    <value>Thank you for registering!</value>
+  </data>
+  <data name="RegistrationPendingText" xml:space="preserve">
+    <value>Your request has been sent to the portal administrator. Once your account is approved, you'll be able to log in and use the portal.</value>
+  </data>
+  <data name="Reject" xml:space="preserve">
+    <value>Reject</value>
+  </data>
+  <data name="RejectConfirm" xml:space="preserve">
+    <value>Reject and delete this request?</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Remember me</value>
+  </data>
+  <data name="RolesColumn" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="RolesLabel" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SelectArtistPlaceholder" xml:space="preserve">
+    <value>— select artist —</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="SiteTitle" xml:space="preserve">
+    <value>Music Portal</value>
+  </data>
+  <data name="SongsCountLabel" xml:space="preserve">
+    <value>songs</value>
+  </data>
+  <data name="SongsHeader" xml:space="preserve">
+    <value>Songs</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Sort by</value>
+  </data>
+  <data name="TitleLabel" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="TitleLength" xml:space="preserve">
+    <value>Title must not exceed 150 characters</value>
+  </data>
+  <data name="TitleRequired" xml:space="preserve">
+    <value>Enter the song title</value>
+  </data>
+  <data name="ToHome" xml:space="preserve">
+    <value>To home page</value>
+  </data>
+  <data name="ToLoginPage" xml:space="preserve">
+    <value>Go to login page</value>
+  </data>
+  <data name="TryChangeFilters" xml:space="preserve">
+    <value>Try changing the filters or upload a new song.</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="UploadDateLabel" xml:space="preserve">
+    <value>Upload date</value>
+  </data>
+  <data name="UploadSongHeader" xml:space="preserve">
+    <value>Upload song</value>
+  </data>
+  <data name="UploadedOn" xml:space="preserve">
+    <value>uploaded</value>
+  </data>
+  <data name="UsernameLength" xml:space="preserve">
+    <value>Name must be 3 to 100 characters</value>
+  </data>
+  <data name="UsernameRequired" xml:space="preserve">
+    <value>Enter a username</value>
+  </data>
+  <data name="UsersHeader" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="YourComment" xml:space="preserve">
+    <value>Your comment...</value>
+  </data>
+  <data name="YourRating" xml:space="preserve">
+    <value>Your rating</value>
+  </data>
+</root>

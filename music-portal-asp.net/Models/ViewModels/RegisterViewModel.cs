@@ -1,39 +1,41 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Castle.Core.Resource;
+using music_portal_asp.net.Resources;
+using System.ComponentModel.DataAnnotations;
+using Resource = music_portal_asp.net.Resources.Resource;
 
 namespace MusicPortal.Models.ViewModels
 {
     public class RegisterViewModel
     {
-        [Required(ErrorMessage = "Введите имя пользователя")]
-        [StringLength(100, MinimumLength = 3, ErrorMessage = "Имя должно быть от 3 до 100 символов")]
-        [Display(Name = "Имя пользователя")]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "UsernameRequired")]
+        [Display(Name = "UsernameLabel", ResourceType = typeof(Resource))]
         public string Username { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Введите Email")]
-        [EmailAddress(ErrorMessage = "Некорректный формат Email")]
-        [Display(Name = "Электронная почта")]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "EmailRequired")]
+        [EmailAddress(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "EmailInvalid")]
+        [Display(Name = "EmailLabel", ResourceType = typeof(Resource))]
         public string Email { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Введите пароль")]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "PasswordRequired")]
         [DataType(DataType.Password)]
-        [StringLength(100, MinimumLength = 6, ErrorMessage = "Пароль должен быть не менее 6 символов")]
-        [Display(Name = "Пароль")]
+        [StringLength(100, MinimumLength = 6, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "PasswordLength")]
+        [Display(Name = "PasswordLabel", ResourceType = typeof(Resource))]
         public string Password { get; set; } = string.Empty;
 
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
-        [Display(Name = "Подтверждение пароля")]
+        [Compare("Password", ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "PasswordsMismatch")]
+        [Display(Name = "ConfirmPasswordLabel", ResourceType = typeof(Resource))]
         public string ConfirmPassword { get; set; } = string.Empty;
 
-        [Display(Name = "Зарегистрироваться как Исполнитель (требует подтверждения)")]
+        [Display(Name = "RegisterAsArtist", ResourceType = typeof(Resource))]
         public bool IsArtistRequested { get; set; } = false;
 
-        [Display(Name = "Сценическое имя (если выбрали роль Исполнителя)")]
-        [StringLength(100, ErrorMessage = "Имя исполнителя не должно превышать 100 символов")]
+        [Display(Name = "ArtistNameLabel", ResourceType = typeof(Resource))]
+        [StringLength(100, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "ArtistNameLength")]
         public string? ArtistName { get; set; }
 
-        [Display(Name = "О себе / Биография")]
-        [StringLength(1000, ErrorMessage = "Описание не должно превышать 1000 символов")]
+        [Display(Name = "BioFieldLabel", ResourceType = typeof(Resource))]
+        [StringLength(1000, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "BioLength")]
         public string? Bio { get; set; }
     }
 }

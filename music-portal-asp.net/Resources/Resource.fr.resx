@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <data name="AccessDeniedHeader" xml:space="preserve">
+    <value>Accès refusé</value>
+  </data>
+  <data name="AccessDeniedText" xml:space="preserve">
+    <value>Vous n'avez pas la permission de voir cette page.</value>
+  </data>
+  <data name="ActionsColumn" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="AddGenreLink" xml:space="preserve">
+    <value>Ajouter un genre</value>
+  </data>
+  <data name="AllGenres" xml:space="preserve">
+    <value>Tous les genres</value>
+  </data>
+  <data name="AlreadyHaveAccount" xml:space="preserve">
+    <value>Vous avez déjà un compte ?</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Appliquer</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>Approuver</value>
+  </data>
+  <data name="ApprovedColumn" xml:space="preserve">
+    <value>Approuvé</value>
+  </data>
+  <data name="ApprovedLabel" xml:space="preserve">
+    <value>Approuvé</value>
+  </data>
+  <data name="ArtistFieldLabel" xml:space="preserve">
+    <value>Artiste</value>
+  </data>
+  <data name="ArtistLabel" xml:space="preserve">
+    <value>Artiste</value>
+  </data>
+  <data name="ArtistNameLabel" xml:space="preserve">
+    <value>Nom de scène (si vous vous inscrivez en tant qu'artiste)</value>
+  </data>
+  <data name="ArtistNameLength" xml:space="preserve">
+    <value>Le nom de l'artiste ne doit pas dépasser 100 caractères</value>
+  </data>
+  <data name="ArtistRequired" xml:space="preserve">
+    <value>Sélectionnez un artiste</value>
+  </data>
+  <data name="ArtistsHeader" xml:space="preserve">
+    <value>Artistes</value>
+  </data>
+  <data name="BioFieldLabel" xml:space="preserve">
+    <value>À propos / Biographie</value>
+  </data>
+  <data name="BioLabel" xml:space="preserve">
+    <value>Biographie</value>
+  </data>
+  <data name="BioLength" xml:space="preserve">
+    <value>La description ne doit pas dépasser 1000 caractères</value>
+  </data>
+  <data name="ByPlays" xml:space="preserve">
+    <value>Par écoutes</value>
+  </data>
+  <data name="ByRating" xml:space="preserve">
+    <value>Par note</value>
+  </data>
+  <data name="ByTitle" xml:space="preserve">
+    <value>Par titre</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="CatalogHeader" xml:space="preserve">
+    <value>Catalogue des chansons</value>
+  </data>
+  <data name="ChooseLang" xml:space="preserve">
+    <value>Choisir la langue</value>
+  </data>
+  <data name="CommentRequired" xml:space="preserve">
+    <value>Ce champ est obligatoire.</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Commentaires</value>
+  </data>
+  <data name="ConfirmPasswordLabel" xml:space="preserve">
+    <value>Confirmer le mot de passe</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Créer</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="DeleteGenreConfirm" xml:space="preserve">
+    <value>Supprimer le genre ? Il sera dissocié de toutes les chansons.</value>
+  </data>
+  <data name="DeletePermanentConfirm" xml:space="preserve">
+    <value>Supprimer définitivement la chanson ?</value>
+  </data>
+  <data name="DeleteSongConfirm" xml:space="preserve">
+    <value>Supprimer la chanson ?</value>
+  </data>
+  <data name="DeleteUserConfirm" xml:space="preserve">
+    <value>Supprimer l'utilisateur ? Son profil d'artiste et ses chansons seront conservés.</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Détails</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Télécharger</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="EditGenreHeader" xml:space="preserve">
+    <value>Modifier le genre</value>
+  </data>
+  <data name="EditSongHeader" xml:space="preserve">
+    <value>Modifier la chanson</value>
+  </data>
+  <data name="EditUserHeader" xml:space="preserve">
+    <value>Modifier l'utilisateur</value>
+  </data>
+  <data name="EmailColumn" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="EmailInvalid" xml:space="preserve">
+    <value>Format d'e-mail invalide</value>
+  </data>
+  <data name="EmailLabel" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>Saisissez votre e-mail</value>
+  </data>
+  <data name="ErrorHeader" xml:space="preserve">
+    <value>Une erreur est survenue</value>
+  </data>
+  <data name="ErrorText" xml:space="preserve">
+    <value>Une erreur inattendue s'est produite. Essayez de retourner à l'accueil.</value>
+  </data>
+  <data name="FileFormatsHint" xml:space="preserve">
+    <value>Formats : mp3, wav, flac, ogg. Maximum 50 Mo.</value>
+  </data>
+  <data name="FileLabel" xml:space="preserve">
+    <value>Fichier audio (mp3, wav, flac, ogg)</value>
+  </data>
+  <data name="FileRequired" xml:space="preserve">
+    <value>Sélectionnez un fichier audio</value>
+  </data>
+  <data name="Genre" xml:space="preserve">
+    <value>Genre</value>
+  </data>
+  <data name="GenreNameLength" xml:space="preserve">
+    <value>Le nom ne doit pas dépasser 50 caractères</value>
+  </data>
+  <data name="GenreNameRequired" xml:space="preserve">
+    <value>Saisissez le nom du genre</value>
+  </data>
+  <data name="GenresHeader" xml:space="preserve">
+    <value>Genres</value>
+  </data>
+  <data name="GenresLabel" xml:space="preserve">
+    <value>Genres</value>
+  </data>
+  <data name="GenresRequired" xml:space="preserve">
+    <value>Sélectionnez au moins un genre</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Connexion</value>
+  </data>
+  <data name="LoginHeader" xml:space="preserve">
+    <value>Connexion</value>
+  </data>
+  <data name="LoginLink" xml:space="preserve">
+    <value>Connexion</value>
+  </data>
+  <data name="LoginToRateAndComment" xml:space="preserve">
+    <value>Connectez-vous pour noter la chanson et laisser un commentaire.</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Déconnexion</value>
+  </data>
+  <data name="MultiSelectHint" xml:space="preserve">
+    <value>Ctrl + clic pour sélectionner plusieurs.</value>
+  </data>
+  <data name="NameColumn" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="NameLabel" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="NavArtists" xml:space="preserve">
+    <value>Artistes</value>
+  </data>
+  <data name="NavGenres" xml:space="preserve">
+    <value>Genres</value>
+  </data>
+  <data name="NavRequests" xml:space="preserve">
+    <value>Demandes</value>
+  </data>
+  <data name="NavSongs" xml:space="preserve">
+    <value>Chansons</value>
+  </data>
+  <data name="NavUpload" xml:space="preserve">
+    <value>Téléverser une chanson</value>
+  </data>
+  <data name="NavUsers" xml:space="preserve">
+    <value>Utilisateurs</value>
+  </data>
+  <data name="NewArtistHeader" xml:space="preserve">
+    <value>Nouvel artiste</value>
+  </data>
+  <data name="NewArtistLink" xml:space="preserve">
+    <value>+ Nouvel artiste</value>
+  </data>
+  <data name="NewGenreHeader" xml:space="preserve">
+    <value>Nouveau genre</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Non</value>
+  </data>
+  <data name="NoAccountYet" xml:space="preserve">
+    <value>Pas encore de compte ?</value>
+  </data>
+  <data name="NoArtistSongs" xml:space="preserve">
+    <value>Cet artiste n'a pas encore de chansons.</value>
+  </data>
+  <data name="NoArtistsYet" xml:space="preserve">
+    <value>Pas encore d'artistes.</value>
+  </data>
+  <data name="NoComments" xml:space="preserve">
+    <value>Pas encore de commentaires.</value>
+  </data>
+  <data name="NoPendingRequests" xml:space="preserve">
+    <value>Aucune nouvelle demande.</value>
+  </data>
+  <data name="NoSongsFound" xml:space="preserve">
+    <value>Aucune chanson trouvée</value>
+  </data>
+  <data name="PasswordLabel" xml:space="preserve">
+    <value>Mot de passe</value>
+  </data>
+  <data name="PasswordLength" xml:space="preserve">
+    <value>Le mot de passe doit comporter au moins 6 caractères</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Saisissez un mot de passe</value>
+  </data>
+  <data name="PasswordsMismatch" xml:space="preserve">
+    <value>Les mots de passe ne correspondent pas</value>
+  </data>
+  <data name="PendingUsersHeader" xml:space="preserve">
+    <value>Demandes d'inscription</value>
+  </data>
+  <data name="PlayCountLabel" xml:space="preserve">
+    <value>Écoutes</value>
+  </data>
+  <data name="PlaysLabel" xml:space="preserve">
+    <value>Écoutes</value>
+  </data>
+  <data name="RatingLabel" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="RegDateColumn" xml:space="preserve">
+    <value>Date d'inscription</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>S'inscrire</value>
+  </data>
+  <data name="RegisterAsArtist" xml:space="preserve">
+    <value>S'inscrire en tant qu'artiste (approbation requise)</value>
+  </data>
+  <data name="RegisterHeader" xml:space="preserve">
+    <value>Inscription</value>
+  </data>
+  <data name="RegisterLink" xml:space="preserve">
+    <value>S'inscrire</value>
+  </data>
+  <data name="RegisterNotice" xml:space="preserve">
+    <value>Après l'inscription, votre demande sera examinée par l'administrateur du portail.</value>
+  </data>
+  <data name="RegistrationPendingHeader" xml:space="preserve">
+    <value>Merci de votre inscription !</value>
+  </data>
+  <data name="RegistrationPendingText" xml:space="preserve">
+    <value>Votre demande a été envoyée à l'administrateur du portail. Une fois votre compte approuvé, vous pourrez vous connecter et utiliser le portail.</value>
+  </data>
+  <data name="Reject" xml:space="preserve">
+    <value>Rejeter</value>
+  </data>
+  <data name="RejectConfirm" xml:space="preserve">
+    <value>Rejeter et supprimer la demande ?</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Se souvenir de moi</value>
+  </data>
+  <data name="RolesColumn" xml:space="preserve">
+    <value>Rôles</value>
+  </data>
+  <data name="RolesLabel" xml:space="preserve">
+    <value>Rôles</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="SelectArtistPlaceholder" xml:space="preserve">
+    <value>— choisir un artiste —</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Envoyer</value>
+  </data>
+  <data name="SiteTitle" xml:space="preserve">
+    <value>Portail musical</value>
+  </data>
+  <data name="SongsCountLabel" xml:space="preserve">
+    <value>chansons</value>
+  </data>
+  <data name="SongsHeader" xml:space="preserve">
+    <value>Chansons</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Trier par</value>
+  </data>
+  <data name="TitleLabel" xml:space="preserve">
+    <value>Titre</value>
+  </data>
+  <data name="TitleLength" xml:space="preserve">
+    <value>Le titre ne doit pas dépasser 150 caractères</value>
+  </data>
+  <data name="TitleRequired" xml:space="preserve">
+    <value>Saisissez le titre de la chanson</value>
+  </data>
+  <data name="ToHome" xml:space="preserve">
+    <value>Vers l'accueil</value>
+  </data>
+  <data name="ToLoginPage" xml:space="preserve">
+    <value>Aller à la page de connexion</value>
+  </data>
+  <data name="TryChangeFilters" xml:space="preserve">
+    <value>Essayez de modifier les filtres ou téléversez une nouvelle chanson.</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Téléverser</value>
+  </data>
+  <data name="UploadDateLabel" xml:space="preserve">
+    <value>Date de téléversement</value>
+  </data>
+  <data name="UploadSongHeader" xml:space="preserve">
+    <value>Téléverser une chanson</value>
+  </data>
+  <data name="UploadedOn" xml:space="preserve">
+    <value>téléversé le</value>
+  </data>
+  <data name="UsernameLength" xml:space="preserve">
+    <value>Le nom doit comporter entre 3 et 100 caractères</value>
+  </data>
+  <data name="UsernameRequired" xml:space="preserve">
+    <value>Saisissez un nom d'utilisateur</value>
+  </data>
+  <data name="UsersHeader" xml:space="preserve">
+    <value>Utilisateurs</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Oui</value>
+  </data>
+  <data name="YourComment" xml:space="preserve">
+    <value>Votre commentaire...</value>
+  </data>
+  <data name="YourRating" xml:space="preserve">
+    <value>Votre note</value>
+  </data>
+</root>

@@ -1,26 +1,29 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Castle.Core.Resource;
 using Microsoft.AspNetCore.Http;
+using music_portal_asp.net.Resources;
+using System.ComponentModel.DataAnnotations;
+using Resource = music_portal_asp.net.Resources.Resource;
 
 namespace MusicPortal.Models.ViewModels
 {
     public class SongUploadViewModel
     {
-        [Required(ErrorMessage = "Введите название песни")]
-        [StringLength(150, ErrorMessage = "Название не должно превышать 150 символов")]
-        [Display(Name = "Название")]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "TitleRequired")]
+        [StringLength(150, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "TitleLength")]
+        [Display(Name = "TitleLabel", ResourceType = typeof(Resource))]
         public string Title { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Выберите аудиофайл")]
-        [Display(Name = "Аудиофайл (mp3, wav, flac, ogg)")]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "FileRequired")]
+        [Display(Name = "FileLabel", ResourceType = typeof(Resource))]
         public IFormFile File { get; set; } = null!;
 
-        [Required(ErrorMessage = "Выберите исполнителя")]
-        [Display(Name = "Исполнитель")]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "ArtistRequired")]
+        [Display(Name = "ArtistFieldLabel", ResourceType = typeof(Resource))]
         public int ArtistId { get; set; }
 
-        [Display(Name = "Жанры")]
-        [Required(ErrorMessage = "Выберите хотя бы один жанр")]
-        [MinLength(1, ErrorMessage = "Выберите хотя бы один жанр")]
+        [Display(Name = "GenresLabel", ResourceType = typeof(Resource))]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "GenresRequired")]
+        [MinLength(1, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "GenresRequired")]
         public List<int> GenreIds { get; set; } = new();
     }
 }
