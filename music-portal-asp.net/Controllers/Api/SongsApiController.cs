@@ -28,27 +28,43 @@ namespace music_portal_asp.net.Controllers.Api
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Song>>> GetSongs()
+        public async Task<IActionResult> GetSongs()
         {
-            return await _context.Songs
-                .Include(s => s.Artist)
-                .Include(s => s.Genres)
+            var songs = await _context.Songs
+                .Select(s => new
+                {
+                    s.Id,
+                    s.Title,
+                    s.FilePath,
+                    s.ArtistId,
+                    Artist = new { s.Artist.Id, s.Artist.Name },
+                    Genres = s.Genres.Select(g => new { g.Id, g.Name })
+                })
                 .ToListAsync();
+            return Ok(songs);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Song>> GetSong(int id)
+        public async Task<IActionResult> GetSong(int id)
         {
             var song = await _context.Songs
-                .Include(s => s.Artist)
-                .Include(s => s.Genres)
-                .SingleOrDefaultAsync(s => s.Id == id);
+                .Where(s => s.Id == id)
+                .Select(s => new
+                {
+                    s.Id,
+                    s.Title,
+                    s.FilePath,
+                    s.ArtistId,
+                    Artist = new { s.Artist.Id, s.Artist.Name },
+                    Genres = s.Genres.Select(g => new { g.Id, g.Name })
+                })
+                .SingleOrDefaultAsync();
             if (song == null) return NotFound();
-            return song;
+            return Ok(song);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Song>> PostSong(SongApiModel model)
+        public async Task<IActionResult> PostSong(SongApiModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             if (!await _context.Artists.AnyAsync(a => a.Id == model.ArtistId))
@@ -71,15 +87,30 @@ namespace music_portal_asp.net.Controllers.Api
             _context.Songs.Add(song);
             await _context.SaveChangesAsync();
 
-            return Ok(song);
+            var artist = await _context.Artists
+                .Where(a => a.Id == song.ArtistId)
+                .Select(a => new { a.Id, a.Name })
+                .SingleOrDefaultAsync();
+
+            return Ok(new
+            {
+                song.Id,
+                song.Title,
+                song.FilePath,
+                song.ArtistId,
+                Artist = artist,
+                Genres = song.Genres.Select(g => new { g.Id, g.Name })
+            });
         }
 
         [HttpPut]
-        public async Task<ActionResult<Song>> PutSong(SongApiModel model)
+        public async Task<IActionResult> PutSong(SongApiModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            var song = await _context.Songs.Include(s => s.Genres).SingleOrDefaultAsync(s => s.Id == model.Id);
+            var song = await _context.Songs
+                .Include(s => s.Genres)
+                .SingleOrDefaultAsync(s => s.Id == model.Id);
             if (song == null) return NotFound();
 
             song.Title = model.Title ?? song.Title;
@@ -93,11 +124,25 @@ namespace music_portal_asp.net.Controllers.Api
             }
 
             await _context.SaveChangesAsync();
-            return Ok(song);
+
+            var artist = await _context.Artists
+                .Where(a => a.Id == song.ArtistId)
+                .Select(a => new { a.Id, a.Name })
+                .SingleOrDefaultAsync();
+
+            return Ok(new
+            {
+                song.Id,
+                song.Title,
+                song.FilePath,
+                song.ArtistId,
+                Artist = artist,
+                Genres = song.Genres.Select(g => new { g.Id, g.Name })
+            });
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Song>> DeleteSong(int id)
+        public async Task<IActionResult> DeleteSong(int id)
         {
             var song = await _context.Songs.SingleOrDefaultAsync(s => s.Id == id);
             if (song == null) return NotFound();
@@ -105,7 +150,7 @@ namespace music_portal_asp.net.Controllers.Api
             _context.Songs.Remove(song);
             await _context.SaveChangesAsync();
 
-            return Ok(song);
+            return Ok(new { song.Id, song.Title });
         }
     }
 }

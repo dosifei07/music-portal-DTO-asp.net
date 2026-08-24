@@ -30,17 +30,39 @@ namespace music_portal_asp.net.Controllers.Api
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<IActionResult> GetUsers()
         {
-            return await _context.Users.Include(u => u.Roles).ToListAsync();
+            var users = await _context.Users
+                .Select(u => new
+                {
+                    u.Id,
+                    u.Username,
+                    u.Email,
+                    u.IsApproved,
+                    u.CreatedAt,
+                    Roles = u.Roles.Select(r => new { r.Id, r.Name })
+                })
+                .ToListAsync();
+            return Ok(users);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<IActionResult> GetUser(int id)
         {
-            var user = await _context.Users.Include(u => u.Roles).SingleOrDefaultAsync(u => u.Id == id);
+            var user = await _context.Users
+                .Where(u => u.Id == id)
+                .Select(u => new
+                {
+                    u.Id,
+                    u.Username,
+                    u.Email,
+                    u.IsApproved,
+                    u.CreatedAt,
+                    Roles = u.Roles.Select(r => new { r.Id, r.Name })
+                })
+                .SingleOrDefaultAsync();
             if (user == null) return NotFound();
-            return user;
+            return Ok(user);
         }
 
         [HttpPost]
@@ -68,7 +90,15 @@ namespace music_portal_asp.net.Controllers.Api
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return Ok(user);
+            return Ok(new
+            {
+                user.Id,
+                user.Username,
+                user.Email,
+                user.IsApproved,
+                user.CreatedAt,
+                Roles = user.Roles.Select(r => new { r.Id, r.Name })
+            });
         }
 
         [HttpPut]
@@ -94,7 +124,15 @@ namespace music_portal_asp.net.Controllers.Api
             }
 
             await _context.SaveChangesAsync();
-            return Ok(user);
+            return Ok(new
+            {
+                user.Id,
+                user.Username,
+                user.Email,
+                user.IsApproved,
+                user.CreatedAt,
+                Roles = user.Roles.Select(r => new { r.Id, r.Name })
+            });
         }
 
         [HttpDelete("{id}")]

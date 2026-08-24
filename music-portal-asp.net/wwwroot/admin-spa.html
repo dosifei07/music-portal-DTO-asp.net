@@ -1,0 +1,514 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Админ-панель Музыкальный портал (SPA)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        body {
+            background-color: #f4f5f7;
+        }
+
+        .app-header {
+            background: #212529;
+            color: #fff;
+            padding: 1rem 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-tab-btn.active {
+            font-weight: 600;
+            border-bottom: 3px solid #0d6efd;
+        }
+
+        .section {
+            display: none;
+        }
+
+            .section.active {
+                display: block;
+            }
+
+        .genre-chip {
+            margin: 2px;
+        }
+
+        #toastArea {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 2000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-header">
+        <div class="container d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">🎵 Админ-панель музыкального портала</h4>
+            <small class="text-secondary">SPA · REST · AJAX</small>
+        </div>
+    </div>
+
+    <div id="toastArea"></div>
+
+    <div class="container">
+
+        <ul class="nav nav-tabs mb-4" id="mainNav">
+            <li class="nav-item"><a class="nav-link nav-tab-btn active" data-section="users" href="#">Пользователи</a></li>
+            <li class="nav-item"><a class="nav-link nav-tab-btn" data-section="songs" href="#">Песни</a></li>
+            <li class="nav-item"><a class="nav-link nav-tab-btn" data-section="genres" href="#">Жанры</a></li>
+        </ul>
+
+        <div id="section-users" class="section active">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title" id="userFormTitle">Новый пользователь</h5>
+                    <form id="userForm" class="row g-3">
+                        <input type="hidden" id="u_Id" value="0" />
+                        <div class="col-md-4">
+                            <label class="form-label">Имя пользователя</label>
+                            <input class="form-control" id="u_Username" required />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="u_Email" required />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Пароль <small class="text-muted">(оставьте пустым, чтобы не менять)</small></label>
+                            <input type="password" class="form-control" id="u_Password" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Роли</label>
+                            <div id="u_Roles" class="border rounded p-2"></div>
+                        </div>
+                        <div class="col-md-3 d-flex align-items-center">
+                            <div class="form-check mt-4">
+                                <input type="checkbox" class="form-check-input" id="u_IsApproved" checked />
+                                <label class="form-check-label" for="u_IsApproved">Одобрен</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary" id="u_SubmitBtn">Создать</button>
+                            <button type="button" class="btn btn-outline-secondary" id="u_ResetBtn">Отмена</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <table class="table table-striped bg-white align-middle">
+                <thead>
+                    <tr><th>Id</th><th>Имя</th><th>Email</th><th>Роли</th><th>Одобрен</th><th class="text-end">Действия</th></tr>
+                </thead>
+                <tbody id="usersTableBody"></tbody>
+            </table>
+        </div>
+
+        <div id="section-songs" class="section">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title" id="songFormTitle">Новая песня</h5>
+                    <form id="songForm" class="row g-3">
+                        <input type="hidden" id="s_Id" value="0" />
+                        <div class="col-md-5">
+                            <label class="form-label">Название</label>
+                            <input class="form-control" id="s_Title" required />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Исполнитель</label>
+                            <select class="form-select" id="s_ArtistId" required></select>
+                        </div>
+                        <div class="col-md-3" id="s_FilePathWrap">
+                            <label class="form-label">Путь к файлу</label>
+                            <input class="form-control" id="s_FilePath" placeholder="/uploads/songs/xxx.mp3" />
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">Жанры</label>
+                            <div id="s_Genres" class="border rounded p-2"></div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary" id="s_SubmitBtn">Создать</button>
+                            <button type="button" class="btn btn-outline-secondary" id="s_ResetBtn">Отмена</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <table class="table table-striped bg-white align-middle">
+                <thead>
+                    <tr><th>Id</th><th>Название</th><th>Исполнитель</th><th>Жанры</th><th class="text-end">Действия</th></tr>
+                </thead>
+                <tbody id="songsTableBody"></tbody>
+            </table>
+        </div>
+
+        <div id="section-genres" class="section">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title" id="genreFormTitle">Новый жанр</h5>
+                    <form id="genreForm" class="row g-3">
+                        <input type="hidden" id="g_Id" value="0" />
+                        <div class="col-md-6">
+                            <label class="form-label">Название жанра</label>
+                            <input class="form-control" id="g_Name" required maxlength="50" />
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary" id="g_SubmitBtn">Создать</button>
+                            <button type="button" class="btn btn-outline-secondary" id="g_ResetBtn">Отмена</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <table class="table table-striped bg-white align-middle">
+                <thead><tr><th>Id</th><th>Название</th><th class="text-end">Действия</th></tr></thead>
+                <tbody id="genresTableBody"></tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script>
+    const api = {
+        users: "/api/Users",
+        songs: "/api/Songs",
+        genres: "/api/Genres",
+        roles: "/api/Roles",
+        artists: "/api/Artists"
+    };
+
+    let rolesCache = [];
+    let genresCache = [];
+    let artistsCache = [];
+
+    function showToast(message, isError) {
+        const cls = isError ? "danger" : "success";
+        const id = "t" + Date.now();
+        const html = `<div id="${id}" class="toast align-items-center text-bg-${cls} border-0 show mb-2" role="alert">
+            <div class="d-flex">
+                <div class="toast-body">${message}</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" onclick="$('#${id}').remove()"></button>
+            </div>
+        </div>`;
+        $("#toastArea").append(html);
+        setTimeout(() => $("#" + id).remove(), 4000);
+    }
+
+    function ajaxRequest(method, url, data) {
+        return $.ajax({
+            url: url,
+            method: method,
+            contentType: "application/json",
+            data: data ? JSON.stringify(data) : undefined
+        }).fail(function (xhr) {
+            let msg = "Ошибка запроса (" + xhr.status + ")";
+            if (xhr.status === 401) msg = "Требуется авторизация. Войдите как администратор на /Account/Login";
+            else if (xhr.status === 403) msg = "Доступ запрещён (нужна роль Admin)";
+            else if (xhr.responseJSON) {
+                if (typeof xhr.responseJSON === "string") msg = xhr.responseJSON;
+                else if (xhr.responseJSON.message) msg = xhr.responseJSON.message;
+                else if (xhr.responseJSON.title) msg = xhr.responseJSON.title;
+            }
+            showToast(msg, true);
+        });
+    }
+
+    $(".nav-tab-btn").on("click", function (e) {
+        e.preventDefault();
+        const section = $(this).data("section");
+        $(".nav-tab-btn").removeClass("active");
+        $(this).addClass("active");
+        $(".section").removeClass("active");
+        $("#section-" + section).addClass("active");
+
+        if (section === "users") loadUsers();
+        if (section === "songs") loadSongs();
+        if (section === "genres") loadGenres();
+    });
+
+    function loadGenres() {
+        ajaxRequest("GET", api.genres).done(function (genres) {
+            genresCache = genres;
+            let rows = "";
+            genres.forEach(function (g) {
+                rows += `<tr data-id="${g.id}">
+                    <td>${g.id}</td><td>${escapeHtml(g.name)}</td>
+                    <td class="text-end">
+                        <button class="btn btn-sm btn-outline-secondary genre-edit">Изменить</button>
+                        <button class="btn btn-sm btn-outline-danger genre-delete">Удалить</button>
+                    </td></tr>`;
+            });
+            $("#genresTableBody").html(rows);
+        });
+    }
+
+    $("#genreForm").on("submit", function (e) {
+        e.preventDefault();
+        const id = parseInt($("#g_Id").val());
+        const dto = { id: id, name: $("#g_Name").val() };
+
+        const request = id === 0
+            ? ajaxRequest("POST", api.genres, dto)
+            : ajaxRequest("PUT", api.genres, dto);
+
+        request.done(function () {
+            showToast(id === 0 ? "Жанр создан" : "Жанр обновлён");
+            resetGenreForm();
+            loadGenres();
+        });
+    });
+
+    $("#genresTableBody").on("click", ".genre-edit", function () {
+        const id = $(this).closest("tr").data("id");
+        const genre = genresCache.find(g => g.id === id);
+        $("#g_Id").val(genre.id);
+        $("#g_Name").val(genre.name);
+        $("#genreFormTitle").text("Редактирование жанра #" + genre.id);
+        $("#g_SubmitBtn").text("Сохранить");
+    });
+
+    $("#genresTableBody").on("click", ".genre-delete", function () {
+        const id = $(this).closest("tr").data("id");
+        if (!confirm("Удалить жанр #" + id + "?")) return;
+        ajaxRequest("DELETE", api.genres + "/" + id).done(function () {
+            showToast("Жанр удалён");
+            loadGenres();
+        });
+    });
+
+    $("#g_ResetBtn").on("click", resetGenreForm);
+    function resetGenreForm() {
+        $("#genreForm")[0].reset();
+        $("#g_Id").val(0);
+        $("#genreFormTitle").text("Новый жанр");
+        $("#g_SubmitBtn").text("Создать");
+    }
+
+    function loadRolesLookup() {
+        return ajaxRequest("GET", api.roles).done(function (roles) {
+            rolesCache = roles;
+            let html = "";
+            roles.forEach(function (r) {
+                html += `<div class="form-check form-check-inline">
+                    <input class="form-check-input role-checkbox" type="checkbox" value="${r.id}" id="role_${r.id}">
+                    <label class="form-check-label" for="role_${r.id}">${escapeHtml(r.name)}</label>
+                </div>`;
+            });
+            $("#u_Roles").html(html);
+        });
+    }
+
+    function loadUsers() {
+        ajaxRequest("GET", api.users).done(function (users) {
+            let rows = "";
+            users.forEach(function (u) {
+                const rolesStr = (u.roles || []).map(r => `<span class="badge bg-secondary genre-chip">${escapeHtml(r.name)}</span>`).join(" ");
+                const approvedBadge = u.isApproved
+                    ? `<span class="badge bg-success">Да</span>`
+                    : `<span class="badge bg-warning text-dark">Нет</span>`;
+                rows += `<tr data-id="${u.id}" data-user='${JSON.stringify(u).replace(/'/g, "&apos;")}'>
+                    <td>${u.id}</td><td>${escapeHtml(u.username)}</td><td>${escapeHtml(u.email)}</td>
+                    <td>${rolesStr}</td><td>${approvedBadge}</td>
+                    <td class="text-end">
+                        <button class="btn btn-sm btn-outline-secondary user-edit">Изменить</button>
+                        <button class="btn btn-sm btn-outline-danger user-delete">Удалить</button>
+                    </td></tr>`;
+            });
+            $("#usersTableBody").html(rows);
+        });
+    }
+
+    $("#userForm").on("submit", function (e) {
+        e.preventDefault();
+        const id = parseInt($("#u_Id").val());
+        const roleIds = $(".role-checkbox:checked").map(function () { return parseInt($(this).val()); }).get();
+
+        const dto = {
+            id: id,
+            username: $("#u_Username").val(),
+            email: $("#u_Email").val(),
+            password: $("#u_Password").val() || null,
+            isApproved: $("#u_IsApproved").is(":checked"),
+            roleIds: roleIds
+        };
+
+        if (id === 0 && !dto.password) {
+            showToast("Для нового пользователя пароль обязателен", true);
+            return;
+        }
+
+        const request = id === 0
+            ? ajaxRequest("POST", api.users, dto)
+            : ajaxRequest("PUT", api.users, dto);
+
+        request.done(function () {
+            showToast(id === 0 ? "Пользователь создан" : "Пользователь обновлён");
+            resetUserForm();
+            loadUsers();
+        });
+    });
+
+    $("#usersTableBody").on("click", ".user-edit", function () {
+        const user = JSON.parse($(this).closest("tr").attr("data-user").replace(/&apos;/g, "'"));
+        $("#u_Id").val(user.id);
+        $("#u_Username").val(user.username);
+        $("#u_Email").val(user.email);
+        $("#u_Password").val("");
+        $("#u_IsApproved").prop("checked", user.isApproved);
+
+        const userRoleIds = (user.roles || []).map(r => r.id);
+        $(".role-checkbox").each(function () {
+            $(this).prop("checked", userRoleIds.includes(parseInt($(this).val())));
+        });
+
+        $("#userFormTitle").text("Редактирование пользователя #" + user.id);
+        $("#u_SubmitBtn").text("Сохранить");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    $("#usersTableBody").on("click", ".user-delete", function () {
+        const id = $(this).closest("tr").data("id");
+        if (!confirm("Удалить пользователя #" + id + "?")) return;
+        ajaxRequest("DELETE", api.users + "/" + id).done(function () {
+            showToast("Пользователь удалён");
+            loadUsers();
+        });
+    });
+
+    $("#u_ResetBtn").on("click", resetUserForm);
+    function resetUserForm() {
+        $("#userForm")[0].reset();
+        $("#u_Id").val(0);
+        $(".role-checkbox").prop("checked", false);
+        $("#u_IsApproved").prop("checked", true);
+        $("#userFormTitle").text("Новый пользователь");
+        $("#u_SubmitBtn").text("Создать");
+    }
+
+    function loadArtistsLookup() {
+        return ajaxRequest("GET", api.artists).done(function (artists) {
+            artistsCache = artists;
+            let options = `<option value="">— выберите исполнителя —</option>`;
+            artists.forEach(function (a) {
+                options += `<option value="${a.id}">${escapeHtml(a.name)}</option>`;
+            });
+            $("#s_ArtistId").html(options);
+        });
+    }
+
+    function loadGenresLookupForSongs() {
+        return ajaxRequest("GET", api.genres).done(function (genres) {
+            genresCache = genres;
+            let html = "";
+            genres.forEach(function (g) {
+                html += `<div class="form-check form-check-inline">
+                    <input class="form-check-input song-genre-checkbox" type="checkbox" value="${g.id}" id="sgenre_${g.id}">
+                    <label class="form-check-label" for="sgenre_${g.id}">${escapeHtml(g.name)}</label>
+                </div>`;
+            });
+            $("#s_Genres").html(html);
+        });
+    }
+
+    function loadSongs() {
+        ajaxRequest("GET", api.songs).done(function (songs) {
+            let rows = "";
+            songs.forEach(function (s) {
+                const genresStr = (s.genres || []).map(g => `<span class="badge bg-secondary genre-chip">${escapeHtml(g.name)}</span>`).join(" ");
+                const artistName = s.artist ? escapeHtml(s.artist.name) : "";
+                rows += `<tr data-id="${s.id}" data-song='${JSON.stringify(s).replace(/'/g, "&apos;")}'>
+                    <td>${s.id}</td><td>${escapeHtml(s.title)}</td><td>${artistName}</td><td>${genresStr}</td>
+                    <td class="text-end">
+                        <button class="btn btn-sm btn-outline-secondary song-edit">Изменить</button>
+                        <button class="btn btn-sm btn-outline-danger song-delete">Удалить</button>
+                    </td></tr>`;
+            });
+            $("#songsTableBody").html(rows);
+        });
+    }
+
+    $("#songForm").on("submit", function (e) {
+        e.preventDefault();
+        const id = parseInt($("#s_Id").val());
+        const genreIds = $(".song-genre-checkbox:checked").map(function () { return parseInt($(this).val()); }).get();
+
+        const dto = {
+            id: id,
+            title: $("#s_Title").val(),
+            filePath: $("#s_FilePath").val(),
+            artistId: parseInt($("#s_ArtistId").val()),
+            genreIds: genreIds
+        };
+
+        if (!dto.artistId) {
+            showToast("Выберите исполнителя", true);
+            return;
+        }
+
+        const request = id === 0
+            ? ajaxRequest("POST", api.songs, dto)
+            : ajaxRequest("PUT", api.songs, dto);
+
+        request.done(function () {
+            showToast(id === 0 ? "Песня создана" : "Песня обновлена");
+            resetSongForm();
+            loadSongs();
+        });
+    });
+
+    $("#songsTableBody").on("click", ".song-edit", function () {
+        const song = JSON.parse($(this).closest("tr").attr("data-song").replace(/&apos;/g, "'"));
+        $("#s_Id").val(song.id);
+        $("#s_Title").val(song.title);
+        $("#s_FilePath").val(song.filePath);
+        $("#s_ArtistId").val(song.artistId);
+
+        const songGenreIds = (song.genres || []).map(g => g.id);
+        $(".song-genre-checkbox").each(function () {
+            $(this).prop("checked", songGenreIds.includes(parseInt($(this).val())));
+        });
+
+        $("#songFormTitle").text("Редактирование песни #" + song.id);
+        $("#s_SubmitBtn").text("Сохранить");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    $("#songsTableBody").on("click", ".song-delete", function () {
+        const id = $(this).closest("tr").data("id");
+        if (!confirm("Удалить песню #" + id + "?")) return;
+        ajaxRequest("DELETE", api.songs + "/" + id).done(function () {
+            showToast("Песня удалена");
+            loadSongs();
+        });
+    });
+
+    $("#s_ResetBtn").on("click", resetSongForm);
+    function resetSongForm() {
+        $("#songForm")[0].reset();
+        $("#s_Id").val(0);
+        $(".song-genre-checkbox").prop("checked", false);
+        $("#songFormTitle").text("Новая песня");
+        $("#s_SubmitBtn").text("Создать");
+    }
+
+    function escapeHtml(str) {
+        if (str === null || str === undefined) return "";
+        return String(str)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;");
+    }
+
+    $(function () {
+        loadRolesLookup();
+        loadArtistsLookup();
+        loadGenresLookupForSongs();
+        loadUsers();
+    });
+    </script>
+
+</body>
+</html>
