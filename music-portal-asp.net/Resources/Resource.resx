@@ -402,6 +402,9 @@
   <data name="UploadedOn" xml:space="preserve">
     <value>загружено</value>
   </data>
+  <data name="UsernameLabel" xml:space="preserve">
+    <value>Имя пользователя</value>
+  </data>
   <data name="UsernameLength" xml:space="preserve">
     <value>Имя должно быть от 3 до 100 символов</value>
   </data>
