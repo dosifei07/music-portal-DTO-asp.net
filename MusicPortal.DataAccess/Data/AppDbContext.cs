@@ -129,14 +129,15 @@ namespace MusicPortal.DataAccess.Data
             );
 
             modelBuilder.Entity<User>().HasData(
-                new User { Id = 1, Username = "admin@gmail.com", Email = "admin@gmail.com", PasswordHash = "AQAAAAIAAYagAAAAEPFXVCoAGGUMBXoztUUqpA7fF/Q++PPdjr6YS1gOcF0Zsy71lwAQ7ZKG2ODK6c3SFA==" },
+                new User { Id = 1, Username = "admin@gmail.com", Email = "admin@gmail.com", PasswordHash = "AQAAAAIAAYagAAAAEPFXVCoAGGUMBXoztUUqpA7fF/Q++PPdjr6YS1gOcF0Zsy71lwAQ7ZKG2ODK6c3SFA==", IsApproved = true },
                 new User { Id = 2, Username = "Ufrseg", Email = "Ufrseg@gmail.com", PasswordHash = "AQAAAAIAAYagAAAAEHOI/ldB8Glyb742DsfFgtuivnInziJ0de0fIi1ragjEQkuxEEMkTQnngilAfzcZvQ==" },
-                new User { Id = 3, Username = "ab21506A", Email = "ab21506a@gmail.com", PasswordHash = "AQAAAAIAAYagAAAAEOVd22mqA1OXfJgD9IlpIOQWgPvkWkZskdEsjAfJJ00pgGAPqJa32H7d75EOGMswtg==" }, // <-- Исправлено
+                new User { Id = 3, Username = "ab21506A", Email = "ab21506a@gmail.com", PasswordHash = "AQAAAAIAAYagAAAAEOVd22mqA1OXfJgD9IlpIOQWgPvkWkZskdEsjAfJJ00pgGAPqJa32H7d75EOGMswtg==" },
                 new User { Id = 4, Username = "string", Email = "string@gmail.com", PasswordHash = "AQAAAAIAAYagAAAAEKgCQ0N4wM7QKgYXrh88fYIqMy/XmogWpgnv8T/Z8w/fgztnlK8WkHyhumSvNcNl6A==" }
             );
 
             modelBuilder.Entity("UserRoles").HasData(
                 new { RoleId = 1, UserId = 1 },
+                new { RoleId = 2, UserId = 1 },
                 new { RoleId = 3, UserId = 1 },
                 new { RoleId = 2, UserId = 2 },
                 new { RoleId = 2, UserId = 3 }

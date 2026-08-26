@@ -12,8 +12,8 @@ using MusicPortal.DataAccess.Data;
 namespace MusicPortal.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260825233015_SeedDataFinal")]
-    partial class SeedDataFinal
+    [Migration("20260826150802_FixUserIsApproved")]
+    partial class FixUserIsApproved
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -161,6 +161,11 @@ namespace MusicPortal.DataAccess.Migrations
                         {
                             Id = 2,
                             Name = "Музыкант"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Рок"
                         },
                         new
                         {
@@ -313,7 +318,7 @@ namespace MusicPortal.DataAccess.Migrations
                             PlayCount = 0,
                             Rating = 5.0,
                             Title = "Песня 1",
-                            UploadDate = new DateTime(2026, 8, 25, 23, 30, 15, 433, DateTimeKind.Utc).AddTicks(2071)
+                            UploadDate = new DateTime(2026, 8, 26, 15, 8, 1, 848, DateTimeKind.Utc).AddTicks(407)
                         },
                         new
                         {
@@ -323,17 +328,17 @@ namespace MusicPortal.DataAccess.Migrations
                             PlayCount = 0,
                             Rating = 4.0,
                             Title = "Песня 2",
-                            UploadDate = new DateTime(2026, 8, 25, 23, 30, 15, 433, DateTimeKind.Utc).AddTicks(2861)
+                            UploadDate = new DateTime(2026, 8, 26, 15, 8, 1, 848, DateTimeKind.Utc).AddTicks(1100)
                         },
                         new
                         {
                             Id = 4,
                             ArtistId = 2,
-                            FilePath = "C:\\Users\\dosif\\Downloads\\music-portal-DTO-asp.net-main\\music-portal-DTO-asp.net-main\\music-portal-asp.net\\wwwroot\\uploads\\songs\\6ce779ef-29f4-4ecd-9780-e989e6b4f6e7.mp3",
+                            FilePath = "/uploads/songs/6ce779ef-29f4-4ecd-9780-e989e6b4f6e7.mp3",
                             PlayCount = 0,
                             Rating = 0.0,
                             Title = "Песня 3",
-                            UploadDate = new DateTime(2026, 8, 25, 23, 30, 15, 433, DateTimeKind.Utc).AddTicks(2864)
+                            UploadDate = new DateTime(2026, 8, 26, 15, 8, 1, 848, DateTimeKind.Utc).AddTicks(1103)
                         },
                         new
                         {
@@ -343,7 +348,7 @@ namespace MusicPortal.DataAccess.Migrations
                             PlayCount = 0,
                             Rating = 0.0,
                             Title = "Песня 4",
-                            UploadDate = new DateTime(2026, 8, 25, 23, 30, 15, 433, DateTimeKind.Utc).AddTicks(2865)
+                            UploadDate = new DateTime(2026, 8, 26, 15, 8, 1, 848, DateTimeKind.Utc).AddTicks(1105)
                         });
                 });
 
@@ -386,16 +391,16 @@ namespace MusicPortal.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2026, 8, 25, 23, 30, 15, 432, DateTimeKind.Utc).AddTicks(8094),
+                            CreatedAt = new DateTime(2026, 8, 26, 15, 8, 1, 847, DateTimeKind.Utc).AddTicks(6847),
                             Email = "admin@gmail.com",
-                            IsApproved = false,
+                            IsApproved = true,
                             PasswordHash = "AQAAAAIAAYagAAAAEPFXVCoAGGUMBXoztUUqpA7fF/Q++PPdjr6YS1gOcF0Zsy71lwAQ7ZKG2ODK6c3SFA==",
                             Username = "admin@gmail.com"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2026, 8, 25, 23, 30, 15, 432, DateTimeKind.Utc).AddTicks(8668),
+                            CreatedAt = new DateTime(2026, 8, 26, 15, 8, 1, 847, DateTimeKind.Utc).AddTicks(7432),
                             Email = "Ufrseg@gmail.com",
                             IsApproved = false,
                             PasswordHash = "AQAAAAIAAYagAAAAEHOI/ldB8Glyb742DsfFgtuivnInziJ0de0fIi1ragjEQkuxEEMkTQnngilAfzcZvQ==",
@@ -404,8 +409,8 @@ namespace MusicPortal.DataAccess.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2026, 8, 25, 23, 30, 15, 432, DateTimeKind.Utc).AddTicks(8672),
-                            Email = "Ufrseg@gmail.com",
+                            CreatedAt = new DateTime(2026, 8, 26, 15, 8, 1, 847, DateTimeKind.Utc).AddTicks(7435),
+                            Email = "ab21506a@gmail.com",
                             IsApproved = false,
                             PasswordHash = "AQAAAAIAAYagAAAAEOVd22mqA1OXfJgD9IlpIOQWgPvkWkZskdEsjAfJJ00pgGAPqJa32H7d75EOGMswtg==",
                             Username = "ab21506A"
@@ -413,8 +418,8 @@ namespace MusicPortal.DataAccess.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2026, 8, 25, 23, 30, 15, 432, DateTimeKind.Utc).AddTicks(8673),
-                            Email = "string",
+                            CreatedAt = new DateTime(2026, 8, 26, 15, 8, 1, 847, DateTimeKind.Utc).AddTicks(7436),
+                            Email = "string@gmail.com",
                             IsApproved = false,
                             PasswordHash = "AQAAAAIAAYagAAAAEKgCQ0N4wM7QKgYXrh88fYIqMy/XmogWpgnv8T/Z8w/fgztnlK8WkHyhumSvNcNl6A==",
                             Username = "string"
@@ -486,6 +491,11 @@ namespace MusicPortal.DataAccess.Migrations
                         new
                         {
                             RoleId = 1,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            RoleId = 2,
                             UserId = 1
                         },
                         new

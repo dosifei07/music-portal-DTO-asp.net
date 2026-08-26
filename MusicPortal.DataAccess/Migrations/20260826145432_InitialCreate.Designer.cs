@@ -12,8 +12,8 @@ using MusicPortal.DataAccess.Data;
 namespace MusicPortal.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260819022059_Fix")]
-    partial class Fix
+    [Migration("20260826145432_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,6 +56,33 @@ namespace MusicPortal.DataAccess.Migrations
                         .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Artists");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Bio = "Поёт",
+                            Name = "Музыкант"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Bio = "RE",
+                            Name = "Reas",
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Bio = "tf",
+                            Name = "Музыка"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Bio = "fDs",
+                            Name = "Sdf"
+                        });
                 });
 
             modelBuilder.Entity("MusicPortal.DataAccess.Models.Comment", b =>
@@ -87,6 +114,24 @@ namespace MusicPortal.DataAccess.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Comments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2026, 7, 20, 12, 48, 9, 193, DateTimeKind.Unspecified).AddTicks(9717),
+                            SongId = 3,
+                            Text = "Ку",
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(2026, 8, 25, 23, 16, 32, 978, DateTimeKind.Unspecified).AddTicks(934),
+                            SongId = 2,
+                            Text = "gt",
+                            UserId = 3
+                        });
                 });
 
             modelBuilder.Entity("MusicPortal.DataAccess.Models.Genre", b =>
@@ -105,6 +150,43 @@ namespace MusicPortal.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Музыкаre"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Музыкант"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Рок"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "movie-asp.net-mvc"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "string"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "string"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "string"
+                        });
                 });
 
             modelBuilder.Entity("MusicPortal.DataAccess.Models.Rating", b =>
@@ -132,6 +214,22 @@ namespace MusicPortal.DataAccess.Migrations
                         .IsUnique();
 
                     b.ToTable("Ratings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 2,
+                            SongId = 2,
+                            UserId = 1,
+                            Value = 5
+                        },
+                        new
+                        {
+                            Id = 3,
+                            SongId = 3,
+                            UserId = 1,
+                            Value = 4
+                        });
                 });
 
             modelBuilder.Entity("MusicPortal.DataAccess.Models.Role", b =>
@@ -210,6 +308,48 @@ namespace MusicPortal.DataAccess.Migrations
                     b.HasIndex("ArtistId");
 
                     b.ToTable("Songs");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 2,
+                            ArtistId = 1,
+                            FilePath = "/uploads/songs/6ce779ef-29f4-4ecd-9780-e989e6b4f6e7.mp3",
+                            PlayCount = 0,
+                            Rating = 5.0,
+                            Title = "Песня 1",
+                            UploadDate = new DateTime(2026, 8, 26, 14, 54, 32, 135, DateTimeKind.Utc).AddTicks(7631)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ArtistId = 1,
+                            FilePath = "/uploads/songs/7e0cedd2-3379-4da6-a7ff-76223ebed9b1.mp3",
+                            PlayCount = 0,
+                            Rating = 4.0,
+                            Title = "Песня 2",
+                            UploadDate = new DateTime(2026, 8, 26, 14, 54, 32, 135, DateTimeKind.Utc).AddTicks(8323)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ArtistId = 2,
+                            FilePath = "/uploads/songs/6ce779ef-29f4-4ecd-9780-e989e6b4f6e7.mp3",
+                            PlayCount = 0,
+                            Rating = 0.0,
+                            Title = "Песня 3",
+                            UploadDate = new DateTime(2026, 8, 26, 14, 54, 32, 135, DateTimeKind.Utc).AddTicks(8325)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ArtistId = 1,
+                            FilePath = "/uploads/songs/df34ccce-986f-4191-886d-59c848541446.mp3",
+                            PlayCount = 0,
+                            Rating = 0.0,
+                            Title = "Песня 4",
+                            UploadDate = new DateTime(2026, 8, 26, 14, 54, 32, 135, DateTimeKind.Utc).AddTicks(8327)
+                        });
                 });
 
             modelBuilder.Entity("MusicPortal.DataAccess.Models.User", b =>
@@ -246,6 +386,44 @@ namespace MusicPortal.DataAccess.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2026, 8, 26, 14, 54, 32, 135, DateTimeKind.Utc).AddTicks(4385),
+                            Email = "admin@gmail.com",
+                            IsApproved = false,
+                            PasswordHash = "AQAAAAIAAYagAAAAEPFXVCoAGGUMBXoztUUqpA7fF/Q++PPdjr6YS1gOcF0Zsy71lwAQ7ZKG2ODK6c3SFA==",
+                            Username = "admin@gmail.com"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2026, 8, 26, 14, 54, 32, 135, DateTimeKind.Utc).AddTicks(4999),
+                            Email = "Ufrseg@gmail.com",
+                            IsApproved = false,
+                            PasswordHash = "AQAAAAIAAYagAAAAEHOI/ldB8Glyb742DsfFgtuivnInziJ0de0fIi1ragjEQkuxEEMkTQnngilAfzcZvQ==",
+                            Username = "Ufrseg"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2026, 8, 26, 14, 54, 32, 135, DateTimeKind.Utc).AddTicks(5001),
+                            Email = "ab21506a@gmail.com",
+                            IsApproved = false,
+                            PasswordHash = "AQAAAAIAAYagAAAAEOVd22mqA1OXfJgD9IlpIOQWgPvkWkZskdEsjAfJJ00pgGAPqJa32H7d75EOGMswtg==",
+                            Username = "ab21506A"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(2026, 8, 26, 14, 54, 32, 135, DateTimeKind.Utc).AddTicks(5015),
+                            Email = "string@gmail.com",
+                            IsApproved = false,
+                            PasswordHash = "AQAAAAIAAYagAAAAEKgCQ0N4wM7QKgYXrh88fYIqMy/XmogWpgnv8T/Z8w/fgztnlK8WkHyhumSvNcNl6A==",
+                            Username = "string"
+                        });
                 });
 
             modelBuilder.Entity("SongGenre", b =>
@@ -261,6 +439,38 @@ namespace MusicPortal.DataAccess.Migrations
                     b.HasIndex("SongId");
 
                     b.ToTable("SongGenre");
+
+                    b.HasData(
+                        new
+                        {
+                            GenreId = 2,
+                            SongId = 2
+                        },
+                        new
+                        {
+                            GenreId = 3,
+                            SongId = 2
+                        },
+                        new
+                        {
+                            GenreId = 4,
+                            SongId = 3
+                        },
+                        new
+                        {
+                            GenreId = 5,
+                            SongId = 3
+                        },
+                        new
+                        {
+                            GenreId = 5,
+                            SongId = 4
+                        },
+                        new
+                        {
+                            GenreId = 5,
+                            SongId = 5
+                        });
                 });
 
             modelBuilder.Entity("UserRoles", b =>
@@ -276,6 +486,28 @@ namespace MusicPortal.DataAccess.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            RoleId = 1,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            RoleId = 3,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            RoleId = 2,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            RoleId = 2,
+                            UserId = 3
+                        });
                 });
 
             modelBuilder.Entity("MusicPortal.DataAccess.Models.Artist", b =>

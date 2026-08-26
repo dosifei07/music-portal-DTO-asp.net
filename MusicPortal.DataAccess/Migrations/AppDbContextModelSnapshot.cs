@@ -315,7 +315,7 @@ namespace MusicPortal.DataAccess.Migrations
                             PlayCount = 0,
                             Rating = 5.0,
                             Title = "Песня 1",
-                            UploadDate = new DateTime(2026, 8, 25, 23, 54, 10, 854, DateTimeKind.Utc).AddTicks(3886)
+                            UploadDate = new DateTime(2026, 8, 26, 15, 8, 1, 848, DateTimeKind.Utc).AddTicks(407)
                         },
                         new
                         {
@@ -325,7 +325,7 @@ namespace MusicPortal.DataAccess.Migrations
                             PlayCount = 0,
                             Rating = 4.0,
                             Title = "Песня 2",
-                            UploadDate = new DateTime(2026, 8, 25, 23, 54, 10, 854, DateTimeKind.Utc).AddTicks(4784)
+                            UploadDate = new DateTime(2026, 8, 26, 15, 8, 1, 848, DateTimeKind.Utc).AddTicks(1100)
                         },
                         new
                         {
@@ -335,7 +335,7 @@ namespace MusicPortal.DataAccess.Migrations
                             PlayCount = 0,
                             Rating = 0.0,
                             Title = "Песня 3",
-                            UploadDate = new DateTime(2026, 8, 25, 23, 54, 10, 854, DateTimeKind.Utc).AddTicks(4788)
+                            UploadDate = new DateTime(2026, 8, 26, 15, 8, 1, 848, DateTimeKind.Utc).AddTicks(1103)
                         },
                         new
                         {
@@ -345,7 +345,7 @@ namespace MusicPortal.DataAccess.Migrations
                             PlayCount = 0,
                             Rating = 0.0,
                             Title = "Песня 4",
-                            UploadDate = new DateTime(2026, 8, 25, 23, 54, 10, 854, DateTimeKind.Utc).AddTicks(4789)
+                            UploadDate = new DateTime(2026, 8, 26, 15, 8, 1, 848, DateTimeKind.Utc).AddTicks(1105)
                         });
                 });
 
@@ -388,16 +388,16 @@ namespace MusicPortal.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2026, 8, 25, 23, 54, 10, 854, DateTimeKind.Utc).AddTicks(370),
+                            CreatedAt = new DateTime(2026, 8, 26, 15, 8, 1, 847, DateTimeKind.Utc).AddTicks(6847),
                             Email = "admin@gmail.com",
-                            IsApproved = false,
+                            IsApproved = true,
                             PasswordHash = "AQAAAAIAAYagAAAAEPFXVCoAGGUMBXoztUUqpA7fF/Q++PPdjr6YS1gOcF0Zsy71lwAQ7ZKG2ODK6c3SFA==",
                             Username = "admin@gmail.com"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2026, 8, 25, 23, 54, 10, 854, DateTimeKind.Utc).AddTicks(951),
+                            CreatedAt = new DateTime(2026, 8, 26, 15, 8, 1, 847, DateTimeKind.Utc).AddTicks(7432),
                             Email = "Ufrseg@gmail.com",
                             IsApproved = false,
                             PasswordHash = "AQAAAAIAAYagAAAAEHOI/ldB8Glyb742DsfFgtuivnInziJ0de0fIi1ragjEQkuxEEMkTQnngilAfzcZvQ==",
@@ -406,7 +406,7 @@ namespace MusicPortal.DataAccess.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2026, 8, 25, 23, 54, 10, 854, DateTimeKind.Utc).AddTicks(954),
+                            CreatedAt = new DateTime(2026, 8, 26, 15, 8, 1, 847, DateTimeKind.Utc).AddTicks(7435),
                             Email = "ab21506a@gmail.com",
                             IsApproved = false,
                             PasswordHash = "AQAAAAIAAYagAAAAEOVd22mqA1OXfJgD9IlpIOQWgPvkWkZskdEsjAfJJ00pgGAPqJa32H7d75EOGMswtg==",
@@ -415,7 +415,7 @@ namespace MusicPortal.DataAccess.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2026, 8, 25, 23, 54, 10, 854, DateTimeKind.Utc).AddTicks(955),
+                            CreatedAt = new DateTime(2026, 8, 26, 15, 8, 1, 847, DateTimeKind.Utc).AddTicks(7436),
                             Email = "string@gmail.com",
                             IsApproved = false,
                             PasswordHash = "AQAAAAIAAYagAAAAEKgCQ0N4wM7QKgYXrh88fYIqMy/XmogWpgnv8T/Z8w/fgztnlK8WkHyhumSvNcNl6A==",
@@ -488,6 +488,11 @@ namespace MusicPortal.DataAccess.Migrations
                         new
                         {
                             RoleId = 1,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            RoleId = 2,
                             UserId = 1
                         },
                         new
