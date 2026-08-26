@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicPortal.DataAccess", "M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicPortal.Infrastructure", "MusicPortal.Infrastructure\MusicPortal.Infrastructure.csproj", "{BC68B433-A98A-4B2D-8279-761BCE2B67BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicPortal.Api", "MusicPortal.Api\MusicPortal.Api.csproj", "{40EDF313-0153-4BB1-A7CB-D39941E94EE9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "keys", "keys", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,18 @@ Global
 		{BC68B433-A98A-4B2D-8279-761BCE2B67BB}.Release|x64.Build.0 = Release|Any CPU
 		{BC68B433-A98A-4B2D-8279-761BCE2B67BB}.Release|x86.ActiveCfg = Release|Any CPU
 		{BC68B433-A98A-4B2D-8279-761BCE2B67BB}.Release|x86.Build.0 = Release|Any CPU
+		{40EDF313-0153-4BB1-A7CB-D39941E94EE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40EDF313-0153-4BB1-A7CB-D39941E94EE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40EDF313-0153-4BB1-A7CB-D39941E94EE9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{40EDF313-0153-4BB1-A7CB-D39941E94EE9}.Debug|x64.Build.0 = Debug|Any CPU
+		{40EDF313-0153-4BB1-A7CB-D39941E94EE9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{40EDF313-0153-4BB1-A7CB-D39941E94EE9}.Debug|x86.Build.0 = Debug|Any CPU
+		{40EDF313-0153-4BB1-A7CB-D39941E94EE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40EDF313-0153-4BB1-A7CB-D39941E94EE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40EDF313-0153-4BB1-A7CB-D39941E94EE9}.Release|x64.ActiveCfg = Release|Any CPU
+		{40EDF313-0153-4BB1-A7CB-D39941E94EE9}.Release|x64.Build.0 = Release|Any CPU
+		{40EDF313-0153-4BB1-A7CB-D39941E94EE9}.Release|x86.ActiveCfg = Release|Any CPU
+		{40EDF313-0153-4BB1-A7CB-D39941E94EE9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

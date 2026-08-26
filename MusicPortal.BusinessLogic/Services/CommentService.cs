@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MusicPortal.BusinessLogic.DTO;
+using MusicPortal.BusinessLogic.Infrastructure;
 using MusicPortal.DataAccess.Models;
 using MusicPortal.DataAccess.Repositories.Interfaces;
 
@@ -30,6 +31,18 @@ namespace MusicPortal.BusinessLogic.Services
             };
         }
 
+        public async Task<IEnumerable<CommentDTO>> GetAllAsync()
+        {
+            var comments = await _commentRepository.GetAllAsync();
+            return _mapper.Map<IEnumerable<CommentDTO>>(comments);
+        }
+
+        public async Task<CommentDTO?> GetByIdAsync(int id)
+        {
+            var comment = await _commentRepository.GetByIdAsync(id);
+            return _mapper.Map<CommentDTO?>(comment);
+        }
+
         public async Task AddAsync(CommentDTO commentDto)
         {
             await _commentRepository.AddAsync(commentDto.SongId, commentDto.UserId, commentDto.Text ?? string.Empty);
@@ -38,6 +51,20 @@ namespace MusicPortal.BusinessLogic.Services
         public async Task AddAsync(int songId, int userId, string text)
         {
             await _commentRepository.AddAsync(songId, userId, text);
+        }
+
+        public async Task UpdateAsync(int id, string text)
+        {
+            var updated = await _commentRepository.UpdateAsync(id, text);
+            if (!updated)
+                throw new ValidationException("Комментарий не найден.", nameof(id));
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var deleted = await _commentRepository.DeleteAsync(id);
+            if (!deleted)
+                throw new ValidationException("Комментарий не найден.", nameof(id));
         }
     }
 }
