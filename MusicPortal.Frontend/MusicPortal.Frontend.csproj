@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>MusicPortal.Frontend</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="src\dist\**" LinkBase="wwwroot" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

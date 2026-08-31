@@ -119,33 +119,31 @@ namespace MusicPortal.DataAccess.Data
             );
 
             modelBuilder.Entity<Genre>().HasData(
-                new Genre { Id = 1, Name = "Музыкаre" },
-                new Genre { Id = 2, Name = "Музыкант" },
-                new Genre { Id = 3, Name = "Рок" },
-                new Genre { Id = 4, Name = "movie-asp.net-mvc" },
-                new Genre { Id = 5, Name = "string" },
-                new Genre { Id = 6, Name = "string" },
-                new Genre { Id = 7, Name = "string" }
+                new Genre { Id = 1, Name = "Поп" },
+                new Genre { Id = 2, Name = "Рок" },
+                new Genre { Id = 3, Name = "Джаз" }
             );
 
             modelBuilder.Entity<User>().HasData(
-                new User { Id = 1, Username = "admin@gmail.com", Email = "admin@gmail.com", PasswordHash = "AQAAAAIAAYagAAAAEPFXVCoAGGUMBXoztUUqpA7fF/Q++PPdjr6YS1gOcF0Zsy71lwAQ7ZKG2ODK6c3SFA==", IsApproved = true },
-                new User { Id = 2, Username = "Ufrseg", Email = "Ufrseg@gmail.com", PasswordHash = "AQAAAAIAAYagAAAAEHOI/ldB8Glyb742DsfFgtuivnInziJ0de0fIi1ragjEQkuxEEMkTQnngilAfzcZvQ==" },
-                new User { Id = 3, Username = "ab21506A", Email = "ab21506a@gmail.com", PasswordHash = "AQAAAAIAAYagAAAAEOVd22mqA1OXfJgD9IlpIOQWgPvkWkZskdEsjAfJJ00pgGAPqJa32H7d75EOGMswtg==" },
-                new User { Id = 4, Username = "string", Email = "string@gmail.com", PasswordHash = "AQAAAAIAAYagAAAAEKgCQ0N4wM7QKgYXrh88fYIqMy/XmogWpgnv8T/Z8w/fgztnlK8WkHyhumSvNcNl6A==" }
+                new User
+                {
+                    Id = 1,
+                    Username = "admin",
+                    Email = "admin@musicportal.local",
+                    PasswordHash = "AQAAAAIAAYagAAAAEPFXVCoAGGUMBXoztUUqpA7fF/Q++PPdjr6YS1gOcF0Zsy71lwAQ7ZKG2ODK6c3SFA==",
+                    IsApproved = true,
+                    CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                }
             );
 
             modelBuilder.Entity("UserRoles").HasData(
                 new { RoleId = 1, UserId = 1 },
-                new { RoleId = 2, UserId = 1 },
-                new { RoleId = 3, UserId = 1 },
-                new { RoleId = 2, UserId = 2 },
-                new { RoleId = 2, UserId = 3 }
+                new { RoleId = 2, UserId = 1 }
             );
 
             modelBuilder.Entity<Artist>().HasData(
                 new { Id = 1, Name = "Музыкант", Bio = "Поёт", UserId = (int?)null },
-                new { Id = 2, Name = "Reas", Bio = "RE", UserId = (int?)2 },
+                new { Id = 2, Name = "Reas", Bio = "RE", UserId = (int?)null },
                 new { Id = 3, Name = "Музыка", Bio = "tf", UserId = (int?)null },
                 new { Id = 4, Name = "Sdf", Bio = "fDs", UserId = (int?)null }
             );
@@ -158,17 +156,17 @@ namespace MusicPortal.DataAccess.Data
             );
 
             modelBuilder.Entity("SongGenre").HasData(
+                new { SongId = 2, GenreId = 1 },
                 new { SongId = 2, GenreId = 2 },
-                new { SongId = 2, GenreId = 3 },
-                new { SongId = 3, GenreId = 4 },
-                new { SongId = 3, GenreId = 5 },
-                new { SongId = 4, GenreId = 5 },
-                new { SongId = 5, GenreId = 5 }
+                new { SongId = 3, GenreId = 2 },
+                new { SongId = 3, GenreId = 3 },
+                new { SongId = 4, GenreId = 1 },
+                new { SongId = 5, GenreId = 2 }
             );
 
             modelBuilder.Entity<Comment>().HasData(
                 new { Id = 2, Text = "Ку", CreatedAt = DateTime.Parse("2026-07-20 12:48:09.1939717"), SongId = 3, UserId = 1 },
-                new { Id = 4, Text = "gt", CreatedAt = DateTime.Parse("2026-08-25 23:16:32.9780934"), SongId = 2, UserId = 3 }
+                new { Id = 4, Text = "gt", CreatedAt = DateTime.Parse("2026-08-25 23:16:32.9780934"), SongId = 2, UserId = 1 }
             );
 
             modelBuilder.Entity<Rating>().HasData(
