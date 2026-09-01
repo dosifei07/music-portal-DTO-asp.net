@@ -25,11 +25,15 @@ export default function SongsPage() {
       .catch((e) => setError(e.message));
   }, [genreId, sortBy, desc, page]);
 
-  const handleDelete = async (id) => {
-    if (!window.confirm("Удалить песню?")) return;
-    await api.deleteSong(id);
-    setResult((r) => ({ ...r, items: r.items.filter((s) => s.id !== id) }));
-  };
+    const handleDelete = async (id) => {
+        if (!window.confirm("Удалить песню?")) return;
+        try {
+            await api.deleteSong(id);
+            setResult((r) => ({ ...r, items: r.items.filter((s) => s.id !== id) }));
+        } catch (err) {
+            setError(err.message || "Не удалось удалить песню");
+        }
+    };
 
   return (
     <div>

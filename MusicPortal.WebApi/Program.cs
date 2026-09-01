@@ -20,8 +20,10 @@ namespace MusicPortal.WebApi
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
+                    options.Cookie.Name = ".MusicPortal.Auth";
                     options.Cookie.SameSite = SameSiteMode.None;
-                    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+                    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+
                     options.Events.OnRedirectToLogin = ctx =>
                     {
                         ctx.Response.StatusCode = StatusCodes.Status401Unauthorized;
@@ -36,7 +38,13 @@ namespace MusicPortal.WebApi
 
             var frontendOrigins = builder.Configuration
                 .GetSection("Cors:AllowedOrigins")
-                .Get<string[]>() ?? new[] { "http://localhost:3000" };
+                .Get<string[]>() ?? new[]
+                {
+                    "http://localhost:5173",
+                    "https://localhost:5173",
+                    "http://localhost:3000",
+                    "https://localhost:3000"
+                };
 
             builder.Services.AddCors(options =>
             {

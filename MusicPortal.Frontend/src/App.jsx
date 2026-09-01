@@ -4,6 +4,7 @@ import { RequireAuth } from "./components/RequireAuth";
 
 import SongsPage from "./pages/SongsPage";
 import SongDetailsPage from "./pages/SongDetailsPage";
+import SongEditPage from "./pages/SongEditPage";
 import SongUploadPage from "./pages/SongUploadPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
