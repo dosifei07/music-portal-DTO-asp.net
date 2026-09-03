@@ -39,10 +39,10 @@ namespace MusicPortal.WebApi.Controllers
 
         [HttpGet]
         public async Task<ActionResult<PagedResult<SongDTO>>> GetAll(
-            [FromQuery] int? genreId, [FromQuery] string? sortBy,
+            [FromQuery] int? genreId, [FromQuery] int? artistId, [FromQuery] string? sortBy,
             [FromQuery] bool desc = true, [FromQuery] int page = 1)
         {
-            var result = await _songService.GetFilteredSongsAsync(genreId, sortBy, desc, page, 12);
+            var result = await _songService.GetFilteredSongsAsync(genreId, artistId, sortBy, desc, page, 12);
             return Ok(result);
         }
 

@@ -49,30 +49,8 @@
     </tbody>
 </table>
 
-@if (Model.TotalPages > 1)
-{
-    var pageNumbers = PaginationHelper.BuildPageList(Model.Page, Model.TotalPages);
-    <nav class="mt-3">
-        <ul class="pagination">
-            <li class="page-item @(Model.HasPrevious ? "" : "disabled")">
-                <a class="page-link" asp-controller="Admin" asp-action="Users" asp-route-page="@(Model.Page - 1)">Назад</a>
-            </li>
-            @foreach (var p in pageNumbers)
-            {
-                if (p == null)
-                {
-                    <li class="page-item disabled"><span class="page-link">…</span></li>
-                }
-                else
-                {
-                    <li class="page-item @(p == Model.Page ? "active" : "")">
-                        <a class="page-link" asp-controller="Admin" asp-action="Users" asp-route-page="@p">@p</a>
-                    </li>
-                }
-            }
-            <li class="page-item @(Model.HasNext ? "" : "disabled")">
-                <a class="page-link" asp-controller="Admin" asp-action="Users" asp-route-page="@(Model.Page + 1)">Вперёд</a>
-            </li>
-        </ul>
-    </nav>
-}
+<pagination current-page="Model.Page"
+            total-pages="Model.TotalPages"
+            action="Users"
+            controller="Admin">
+</pagination>

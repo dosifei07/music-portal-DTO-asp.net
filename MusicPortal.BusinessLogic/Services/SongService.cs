@@ -19,9 +19,9 @@ namespace MusicPortal.BusinessLogic.Services
             _mapper = mapper;
         }
 
-        public async Task<PagedResult<SongDTO>> GetFilteredSongsAsync(int? genreId, string? sortBy, bool descending, int page, int pageSize)
+        public async Task<PagedResult<SongDTO>> GetFilteredSongsAsync(int? genreId, int? artistId, string? sortBy, bool descending, int page, int pageSize)
         {
-            var pagedResult = await _songRepository.GetFilteredSongsAsync(genreId, sortBy, descending, page, pageSize);
+            var pagedResult = await _songRepository.GetFilteredSongsAsync(genreId, artistId, sortBy, descending, page, pageSize);
             var dtos = _mapper.Map<IEnumerable<SongDTO>>(pagedResult.Items);
             return new PagedResult<SongDTO>(dtos, pagedResult.TotalCount, page, pageSize);
         }

@@ -33,7 +33,7 @@ namespace MusicPortal.DataAccess.Repositories.Implementations
                 .ToListAsync();
         }
 
-        public async Task<PagedResult<Song>> GetFilteredSongsAsync(int? genreId, string? sortBy, bool descending = true, int page = 1, int pageSize = 12)
+        public async Task<PagedResult<Song>> GetFilteredSongsAsync(int? genreId, int? artistId, string? sortBy, bool descending = true, int page = 1, int pageSize = 12)
         {
             page = page < 1 ? 1 : page;
             pageSize = pageSize < 1 ? 12 : pageSize;
@@ -42,6 +42,10 @@ namespace MusicPortal.DataAccess.Repositories.Implementations
             if (genreId.HasValue)
             {
                 baseQuery = baseQuery.Where(s => s.Genres.Any(g => g.Id == genreId.Value));
+            }
+            if (artistId.HasValue)
+            {
+                baseQuery = baseQuery.Where(s => s.ArtistId == artistId.Value);
             }
 
             var totalCount = await baseQuery.CountAsync();

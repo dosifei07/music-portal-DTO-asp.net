@@ -24,9 +24,14 @@ export function AuthProvider({ children }) {
     useEffect(() => {
         api
             .me()
-            .then((userData) => {
-                setUser(userData);
-            })
+            .then((data) =>
+                setUser({
+                    id: data.id,
+                    username: data.username,
+                    email: data.email,
+                    roles: data.roles || [],
+                })
+            )
             .catch(() => setUser(null))
             .finally(() => setLoading(false));
     }, []);

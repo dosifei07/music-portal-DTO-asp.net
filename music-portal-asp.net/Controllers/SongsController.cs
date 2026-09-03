@@ -46,12 +46,15 @@ namespace music_portal_asp.net.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(int? genreId, string? sortBy, bool desc = true, int page = 1)
+        [HttpGet]
+        public async Task<IActionResult> Index(int? genreId, int? artistId, string? sortBy, bool desc = true, int page = 1)
         {
-            var result = await _songService.GetFilteredSongsAsync(genreId, sortBy, desc, page, 12);
+            var result = await _songService.GetFilteredSongsAsync(genreId, artistId, sortBy, desc, page, 12);
 
             ViewBag.Genres = await _genreService.GetAllAsync();
+            ViewBag.Artists = await _artistService.GetAllBriefAsync();
             ViewBag.SelectedGenreId = genreId;
+            ViewBag.SelectedArtistId = artistId;
             ViewBag.SortBy = sortBy;
             ViewBag.Desc = desc;
 
